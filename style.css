@@ -1,0 +1,181 @@
+
+body {
+	font-family: "Courier New";
+	margin: 0 !important;
+}
+
+nav {
+	position: absolute;
+	top: 70px;
+	right: 10px;
+}
+
+ul {
+	margin-top: 0;
+}
+
+nav ul li {
+	list-style-type: none;
+	text-align: right;
+}
+
+nav ul li a {
+	color: #fff;
+	background: black;
+	padding: 2px 5px 0px 5px;
+	font-size: 30px;
+	font-family: "Courier New";
+	line-height: 45px;
+	transition: font-size .1s;
+	-webkit-transition: font-size .1s; /* Safari */
+}
+
+nav ul li a:hover {
+	font-size: 35px;
+	margin-right: 10px;
+	//border-bottom: 2px solid;
+}
+
+h2 {
+	color: white;
+	padding: 5px 10px;
+	font-size: 1.5em;
+	background:#bf1f2e;
+   	border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+h3 {
+	text-decoration: underline;
+}
+
+h3, h4 {
+	margin: 5px;
+}
+
+h5 {
+	margin: 5px;
+}
+
+p {
+	margin: 0;
+}
+
+
+#logo, nav a {
+	text-decoration: none !important;
+}
+
+#logo {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: white;
+	background: black;
+	padding: 2px 5px 0px 5px;
+	font-size: 3em;
+	font-family: "Courier New";
+}
+
+#logo:hover {
+	font-size: 3.1em;
+}
+
+a {
+	color: #bf1f2e;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+
+#imgDiv {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	overflow: hidden;
+}
+
+#content {
+	width: 100%;
+	background: url("img/background2.jpg") no-repeat;
+	background-size: cover;
+
+}
+
+#floatingButton a {
+	display: inline-block;
+	position: absolute;
+	top: 85%;
+	left: 42%;
+	background: yellow;
+	padding: 20px 50px;
+	border-radius: 3px;
+	color: black;
+	text-decoration: none;
+	font-size: 25px;
+	transition: top .25s;
+}
+
+#floatingButton a:hover {
+	text-decoration: none;
+	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
+	top: 84%;
+}
+
+#spacer {
+	width: 100% !important;
+	height: 10px;
+}
+
+footer {
+	background: black;
+	padding: 30px 20px;
+	padding-left: 10%;
+}
+
+footer p {
+	color: white;
+}
+
+.textElements {
+	padding: 1%;
+	padding-left: 10%;
+}
+
+.innerText, #Skills ul, #Contact ul {
+	margin-left: 3%;
+	background: white;
+	max-width: 75%;
+	padding: 30px;
+	margin-bottom: 15px;
+	box-shadow: 8px 8px 15px #777;
+}
+
+.jobTitle {
+	font-size: 20px;
+	background: black; 
+	color: white;
+	padding: 5px 5px 2px 5px;
+	border-radius: 5px;
+	line-height: 40px;
+}
+
+.responsibilities {
+	margin-left: 2%;
+}
+
+.icons img {
+	padding: 2px;
+	transition: margin-top .1s;
+	-webkit-transition: margin-top .1s;
+}
+
+.icons img:hover {
+	margin-top: -10px;
+}
