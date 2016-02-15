@@ -10,10 +10,6 @@ nav {
 	right: 10px;
 }
 
-ul {
-	margin-top: 0;
-}
-
 nav ul li {
 	list-style-type: none;
 	text-align: right;
@@ -103,7 +99,7 @@ a:hover {
 
 #content {
 	width: 100%;
-	background: url("img/background2.jpg") no-repeat;
+	background: url("../img/background2.jpg") no-repeat;
 	background-size: cover;
 
 }
@@ -128,7 +124,7 @@ a:hover {
 	top: 84%;
 }
 
-#spacer {
+.spacer {
 	width: 100% !important;
 	height: 10px;
 }
