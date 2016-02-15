@@ -1,96 +1,44 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head ng-controller="titleController">
+	<title ng-cloak>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<!--[if lt IE 9]>
   	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<title>David Ostler - Resum&eacute;</title>
 </head>
 
+<body onload="normalize()" onresize="normalize()" onmousemove="normalize()" onscroll="normalize()">
 
-<body onload="normalize()" onresize="normalize()" onmousemove="normalize()"   onscroll="normalize()">
+	<div ng-controller="topController">
+		<!-- LOGO -->	
+		<a href="#top" id="logo" ng-cloak>{{title}}</a>
 
-	<!-- LOGO -->	
-	<a href="#top" id="logo">David Ostler</a>
-
-	<nav>
-		<ul>
-			<li><a href="#Education" id="educationButton">Education</a></li>
-			<li><a href="#Experience" id="experienceButton">Experience</a></li>
-			<li><a href="#Skills" id="skillsButton">Skills</a></li>
-			<li><a href="#Contact" id="contactButton">Contact</a></li>
-		</ul>
-	</nav>
-
-	<!-- Photo -->
-	<div id="imgDiv">
-		<img src="img/home1_bw.png" alt="homePhoto" id="home1">
-	</div>
-
-	<div id="floatingButton">
-		<a href="#Education" id="floatingLink"><b>See Resum&eacute;</b></a>
-	</div>
-
-	<div class="spacer"></div>
-
-	<div ng-app="mainApp" id="content">
-		
-		<div id="Education" class="textElements">
-			<h2>Education</h2><br>
-			<div class="innerText">
-				<h3>Brigham Young University</h3>
-				<h4>Bachelor's Degree in Computer Science - <em>December 2017</em></h4>
-			</div>
-		</div>
-
-		<div id="Experience" class="textElements">
-			<section id="job_2">
-				<h2>Experience</h2><br>
-				<div class="innerText">
-					<h3>Wallaroo Media</h3>
-					<h5><span style="color: gray;">120 West Center St, Provo, UT 84601</span></h5><br>
-					<h4><span class="jobTitle">Junior Web Designer</span> <span style="color: gray;">(May 2014 - November 2014)</span></h4>
-					<div class="responsibilities">
-						<h4>Responsibilities:</h4>
-						<ul>
-							<li>Designed Wordpress websites optimized for SEO</li>
-							<li>Worked one-on-one with clients</li>
-						</ul>
-
-						<p><b>Employer: Kyle Nguyen</b></p>
-						<p><b>phone: (801) 900-1409</b></p>
-					</div>
-				</div>
-			</section>
-
-			<section id="job_1" class="innerText">
-				<h3>BYU - Research (Religion Department)</h3><br>
-				<h4><span class="jobTitle">Head Research Assistant</span> <span style="color: gray;">(April 2013 - November 2014)</span></h4>
-				<div class="responsibilities">
-					<h4>Responsibilities:</h4>
-					<ul>
-						<li>Worked with Dr. Alford to set goals for research team</li>
-						<li>Managed a team to publish a book</li>
-						<li>Discover more efficient ways to achieve goals</li>
-					</ul>
-				</div>
-				<p><b>Employer: Dr. Ken Alford</b></p>
-				<p><b>Email: alford@byu.edu</b></p>
-			</section>
-
-		</div>
-
-		<div id="Skills" class="textElements">
-			<h2>Skills</h2><br>
-			<ul>
-				<li>Programming languages: Java, C, C++, Python, HTML, CSS, JavaScript, SQL</li>
-				<li>Team Player</li>
-				<li>Bilingual: English, Spanish</li>
+		<nav>
+			<ul ng-repeat="heading in headings">
+				<heading></heading>
 			</ul>
+		</nav>
+
+		<!-- Photo -->
+		<div id="imgDiv">
+			<img src="{{mainImageUrl}}" alt="homePhoto" id="home1" ng-cloak>
 		</div>
 
-		<div id="Contact" class="textElements">
+		<div id="floatingButton">
+			<a href="#Education" id="floatingLink"><b>See Resum&eacute;</b></a>
+		</div>
+
+		<div class="spacer"></div>
+	</div>
+
+	<div ng-controller="contentController" id="content">
+
+		<div ng-repeat="content in contentList">
+			<content></content>
+		</div>
+
+<!-- 		<div id="Contact" class="textElements">
 			<h2>Contact</h2><br>
 			<ul>
 				<li>Email: <a href="mailto:david.ostler001@gmail.com?Subject='Online%20Resume%20Email'">david.ostler001@gmail.com</a></li>
@@ -107,7 +55,7 @@
 					</tr>
 				</table>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 	<div class="spacer"></div>
 <footer>

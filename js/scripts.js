@@ -32,7 +32,7 @@ function makeImageFullScreen() {
 function fixTopMargin() {
     var imgHeight = document.getElementById("home1").height;
 
-    document.getElementById("Education").style.marginTop = imgHeight + "px";
+    document.getElementById("content").style.marginTop = imgHeight + "px";
 }
 
 function resumeButton() {
