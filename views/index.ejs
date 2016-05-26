@@ -1,11 +1,69 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html ng-app="app">
+<head ng-controller="titleController">
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<!--[if lt IE 9]>
+  	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body onload="normalize()" onresize="normalize()" onmousemove="normalize()" onscroll="normalize()" ng-cloak>
+
+	<div ng-controller="topController">
+		<!-- LOGO -->	
+		<a href="#top" id="logo">{{title}}</a>
+
+		<nav>
+			<ul ng-repeat="heading in headings">
+				<heading></heading>
+			</ul>
+		</nav>
+
+		<!-- Photo -->
+		<div id="imgDiv">
+			<img src="{{mainImageUrl}}" alt="homePhoto" id="home1">
+		</div>
+
+		<div id="floatingButton">
+			<a href="#Education" id="floatingLink"><b>See Resum&eacute;</b></a>
+		</div>
+
+		<div class="spacer"></div>
+	</div>
+
+	<div ng-controller="contentController" id="content">
+
+		<div ng-repeat="content in contentList">
+			<content></content>
+		</div>
+
+<!-- 		<div id="Contact" class="textElements">
+			<h2>Contact</h2><br>
+			<ul>
+				<li>Email: <a href="mailto:david.ostler001@gmail.com?Subject='Online%20Resume%20Email'">david.ostler001@gmail.com</a></li>
+				<li>Phone: <a href="tel:305-484-0510">(305)484-0510</a></li>
+				<table>
+					<thead>
+						<tr><th colspan="4">Connect on Social Media</th></tr>
+					</thead>
+					<tr>
+						<td><a target="_blank" href="https://www.facebook.com/James.David.Bond.007" class="icons"><img src="img/icons/facebook_icon.png" alt="Facebook" width="47px" style="border-radius: 30px;"></a></td>
+						<td><a target="_blank" href="#" class="icons"><img src="img/icons/GooglePlus_icon.png" alt="Google+" width="50px" style="border-radius: 30px"></a></td>
+						<td><a target="_blank" href="#" class="icons"><img src="img/icons/twitter_icon.png" alt="Twitter" width="50px"></a></td>
+						<td><a target="_blank" href="https://github.com/dro248" class="icons"><img src="img/icons/github_icon.png" alt="Github" width="50px"></a></td>
+					</tr>
+				</table>
+			</ul>
+		</div> -->
+	</div>
+	<div class="spacer"></div>
+<footer>
+		<p>&copy;Copyright 2016</p>
+</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/scripts.js"></script>
+</body>
 </html>
