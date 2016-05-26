@@ -10,15 +10,14 @@ app.directive("content", contentDirective);
 var config = {
 	meta:{
 		title: "Name Here",
-		mainImageUrl: "http://p1.pichost.me/i/74/1988702.jpg",
+		mainImagePath: "http://p1.pichost.me/i/74/1988702.jpg",
 		phone: "(555) 123-1234"
 	},
-	content: {
-		Education:"ASDFASDF",
-		Experience:"asdf",
-		Skills:"eqrqewrqwer",
-		Contact:"zxcvzxcvzxcv"
-	}
+	content: [
+		{ Education : "Test"},
+		{ Work : "Test12"},
+		{ Expericensad : "Test"}
+	]
 }
 
 function title($scope) {
@@ -27,15 +26,15 @@ function title($scope) {
 
 function topController($scope) {
 	$scope.title = config.meta.title;
-	$scope.mainImageUrl = config.meta.mainImageUrl;
-	$scope.headings = Object.keys(config.content);
+	$scope.mainImagePath = config.meta.mainImagePath;
+	$scope.headings = config.content.map(function(o){return Object.keys(o)[0];});;
 }
 
 function contentController($scope) {
-	$scope.contentList = Object.keys(config.content).map(function (key) {
+	$scope.contentList = config.content.map(function (obj) {
 		return {
-			title:key,
-			content:config.content[key]
+			title:Object.keys(obj)[0],
+			content:obj[Object.keys(obj)]
 		};
 	});
 }
@@ -51,10 +50,8 @@ function contentDirective() {
 	return {
 		restrict: "E",
 		template: "<div id='{{content.title}}' class='textElements'>\
-			<h2>{{content.title}}</h2>\
-			<ul>\
-				<li>{{content.content}}<li>\
-			</ul>\
+			<h2 class='contentHeader'>{{content.title}}</h2>\
+			<div class='contentBox'>{{content.content}}</div>\
 		</div>"
 	};
 }
