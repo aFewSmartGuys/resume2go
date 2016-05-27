@@ -7,7 +7,7 @@ function normalize() {
 function makeImageFullScreen() {
 	// alert("you're hovering");
 
-	myImg = document.getElementById("home1");
+	var myImg = document.getElementById("home1");
 
 	if(window.innerHeight > window.innerWidth){
 		myImg.style.height = window.innerHeight+ "px";
