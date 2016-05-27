@@ -28,12 +28,10 @@ function topController($scope) {
 	$scope.title = config.meta.title;
 	$scope.mainImagePath = config.meta.mainImagePath;
 	$scope.headings = config.content.map(function(o){return Object.keys(o)[0];});
-	$scope.click = function(){
-		$("#"+$scope.name+"Button").click(function() {
+	$scope.click = function(name){
 	    $('html, body').animate({
-	        scrollTop: $("#"+$scope.name).offset().top
-		    }, 500);
-		});
+	        scrollTop: $("#"+name).offset().top
+		}, 500);
 	}
 
 }
@@ -50,10 +48,11 @@ function contentController($scope) {
 function headingDirective() {
 	return {
 		scope: {
+			name: "=",
 			clicked: '&'
 		},
 		restrict: "E",
-		template: "<li><a href='#{{heading}}' id='{{heading}}Button' ng-click='clicked()'>{{heading}}</a></li>"
+		template: "<li><a href='#{{heading}}' id='{{heading}}Button' ng-click='clicked({{heading}})'>{{heading}}</a></li>"
 	};
 }
 
