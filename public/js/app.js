@@ -28,7 +28,7 @@ function topController($scope) {
 	$scope.title = config.meta.title;
 	$scope.mainImagePath = config.meta.mainImagePath;
 	$scope.headings = config.content.map(function(o){return Object.keys(o)[0];});
-	$scope.click = function(name){
+	$scope.scrollToContent = function(name){
 	    $('html, body').animate({
 	        scrollTop: $("#"+name).offset().top
 		}, 500);
@@ -52,7 +52,7 @@ function headingDirective() {
 			clicked: '&'
 		},
 		restrict: "E",
-		template: "<li><a href='#{{heading}}' id='{{heading}}Button' ng-click='clicked({{heading}})'>{{heading}}</a></li>"
+		template: "<li><a href='' id='{{name}}Button' ng-click='clicked()'>{{name}}</a></li>"
 	};
 }
 
