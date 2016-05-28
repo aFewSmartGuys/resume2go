@@ -18,6 +18,15 @@
 		this.content = args.content || [];
 	}
 
+	Content.prototype.setContent = function(args) {
+		this.meta = {
+			title: args.title || "No Title Set",
+			mainImage: args.mainImage || "",
+			phone: args.phone || "No Phone Number Set"
+		};
+		this.content = args.content || [];
+	};
+
 	Content.prototype.getTitle = function() {
 		return this.meta.title;
 	};

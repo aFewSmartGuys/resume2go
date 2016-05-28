@@ -9,11 +9,12 @@ app.directive("content", contentDirective);
 
 // Get the content from the backend
 var content = new Rezoomae.classes.Content({});
-/*
-$.getJson("/getContent", function(data){
-	content = new Rezoomae.classes.Content(data);
+
+$.getJSON("/content", function(data){
+	console.log(data);
+	content.setContent(data);
 });
-*/
+
 function title($scope) {
 	$scope.title = content.getTitle();
 }

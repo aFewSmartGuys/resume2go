@@ -3,7 +3,7 @@
 \*********************************************************/
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/portfolios');
+mongoose.connect('mongodb://localhost/rezoomae');
 
 var db = mongoose.connection;
 

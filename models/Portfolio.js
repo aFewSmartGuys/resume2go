@@ -3,57 +3,35 @@ var dbo = require('./dbo');
 var portfolioSchema = dbo.Schema({
     meta:{
       title: String,
-      mainImagePath: String,
+      mainImage: String,
       phone: String
     },
     content: [{
       String: String
     }]
   },
-  {collection: 'portfolios'});
+  {collection: 'portfolio'});
 
-var Portfolio = dbo.model('Portfolio', portfolioSchema);
+var Rezoomae = dbo.model('Rezoomae', portfolioSchema);
 
 module.exports = {
-  /**
-   * Get all links
-   */
-  getAll: function() {
+
+  get: function() {
     return new Promise(function(resolve, reject) {
-      Link.find(function(err, links) {
+      Rezoomae.find(function(err, content) {
         if (err) {
           console.log(err);
           reject(err);
         }
-        resolve(links);
+        console.log(content);
+        resolve(content);
       });
     });
   },
 
-  addLink: function(link) {
+  write: function(updatedContent) {
     return new Promise(function(resolve) {
-      var l = new Link(link);
-      l.save(function(err, obj) {
-        if (err) {
-          resolve(false);
-        } else {
-          resolve(true);
-        }
-      });
-    });
-  },
-
-  removeLink: function(linkId) {
-    link.findOne({_id: linkId}, function(err, link) {
-      console.log("delete link");
-      console.log(link);
-      link.remove(function(err) {
-        if (err) {
-          return false;
-        } else {
-          return true;
-        }
-      });
+      Rezoomae.portfolio.update({'_id':content._id},updatedContent,{upsert:true})
     });
   }
 };
