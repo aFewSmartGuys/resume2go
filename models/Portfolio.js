@@ -18,7 +18,7 @@ module.exports = {
 
   get: function() {
     return new Promise(function(resolve, reject) {
-      Rezoomae.find(function(err, content) {
+      Rezoomae.findOne({}, function(err, content) {
         if (err) {
           console.log(err);
           reject(err);
@@ -31,7 +31,7 @@ module.exports = {
 
   write: function(updatedContent) {
     return new Promise(function(resolve) {
-      Rezoomae.portfolio.update({'_id':content._id},updatedContent,{upsert:true})
+      Rezoomae.update({'_id':content._id},updatedContent,{multi:false, upsert:true})
     });
   }
 };
