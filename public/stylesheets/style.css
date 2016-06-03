@@ -2,9 +2,14 @@
   display: none !important;
 }
 
-body {
+* {
+	margin: 0;
+}
+
+html,body {
 	font-family: "Courier New";
 	margin: 0 !important;
+	height: 100%;
 }
 
 nav {
@@ -127,11 +132,27 @@ a:hover {
 	top: 84%;
 }
 
-#googleButton a {
-	display: inline-block;
+/******************************/
+
+#buttons {
+	display: inline-flex;
 	position: absolute;
 	top: 50%;
 	left: 30%;
+}
+
+#buttons div {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#buttons div a:hover {
+	text-decoration: none;
+	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
+	top: 49%;
+}
+
+.googleButton a {
 	background: yellow;
 	padding: 20px 50px;
 	border-radius: 3px;
@@ -141,17 +162,7 @@ a:hover {
 	transition: top .25s;
 }
 
-#googleButton a:hover {
-	text-decoration: none;
-	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
-	top: 49%;
-}
-
-#loginButton a {
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
+.loginButton a {
 	background: #99BADD;
 	padding: 20px 50px;
 	border-radius: 3px;
@@ -161,16 +172,38 @@ a:hover {
 	transition: top .25s;
 }
 
-#loginButton a:hover {
-	text-decoration: none;
-	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
-	top: 49%;
-}
+/******************************/
 
 .spacer {
 	width: 100% !important;
 	height: 10px;
 }
+
+/***************http://ryanfait.com/resources/footer-stick-to-bottom-of-page***************/
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -4em;
+}
+
+.loginFooter, .push {
+	height: 4em;
+	margin: 0;
+}
+
+.loginFooter {
+	background: black;
+}
+
+.loginFooter p {
+	padding-top: 10px;
+	padding-left: 10px;
+	color: white;
+}
+
+/******************************/
 
 footer {
 	background: black;
