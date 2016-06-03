@@ -1,15 +1,15 @@
-var dbo = require('dbo'),
-	bcrypt = require(bcrypt),
+var dbo = require('./dbo'),
+	bcrypt = require('bcrypt'),
 	SALT_WORK_FACTOR = 12;
 
 var OwnerSchema = new dbo.Schema({
-	ownername: { type: String, required: true, index: { unique: true } },
+	name: { type: String, required: true, index: { unique: true } },
 	password: { type: String, required: true},
 	authType: { type: String}
 }, {collection: "owner"});
 
 // bcrypt Middleware!
-OwnerSchema.pre(save, function(next) {
+OwnerSchema.pre('save', function(next) {
 	var owner = this;
 
 	// only hash the password if it has been modified (or is new)

@@ -16,8 +16,25 @@ router.post('/auth', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
 	var body = req.body;
-	console.log(body);
-	res.send("userCreation Not Yet Implemented.");
+	console.log("asdfasdf");
+	var Owner = require("../models/Owner");
+	console.log("asdfasdf");
+	var testowner = new Owner({name: body.name, password: body.password, authType: body.authType});
+	console.log("asdfasdf");
+	testowner.save(function(err) {
+		if (err) throw err;
+		console.log("hi");
+		Owner.find({}, function(err, owner) {
+		console.log("hi");
+			if (err) throw err;
+			console.log(owner);
+			owner.comparePassword(body.password, function(err, isMatch) {
+				if (err) throw err;
+				console.log(body.password, isMatch);
+				res.send(isMatch);
+			});
+		});
+	});
 });
 
 // GET /auth/google
