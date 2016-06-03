@@ -2,23 +2,23 @@ var dbo = require('./dbo');
 
 var portfolioSchema = dbo.Schema({
     meta:{
-      title: String,
+      title: {type: String, required: true},
       mainImage: String,
       phone: String
     },
     content: [{
-      String: String
+      String: {type: String, required: true}
     }]
   },
   {collection: 'portfolio'});
 
-var Rezoomae = dbo.model('Rezoomae', portfolioSchema);
+var RezoomaeSchema = dbo.model('Rezoomae', portfolioSchema);
 
 module.exports = {
 
   get: function() {
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOne({}, function(err, content) {
+      RezoomaeSchema.findOne({}, function(err, content) {
         if (err) {
           console.log(err);
           reject(err);
@@ -31,7 +31,7 @@ module.exports = {
 
   write: function(updatedContent) {
     return new Promise(function(resolve) {
-      Rezoomae.update({'_id':content._id},updatedContent,{multi:false, upsert:true})
+      RezoomaeSchema.update({'_id':content._id},updatedContent,{multi:false, upsert:true})
     });
   }
 };

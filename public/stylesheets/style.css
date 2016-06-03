@@ -127,6 +127,46 @@ a:hover {
 	top: 84%;
 }
 
+#googleButton a {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	background: yellow;
+	padding: 20px 50px;
+	border-radius: 3px;
+	color: black;
+	text-decoration: none;
+	font-size: 25px;
+	transition: top .25s;
+}
+
+#googleButton a:hover {
+	text-decoration: none;
+	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
+	top: 49%;
+}
+
+#loginButton a {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background: #99BADD;
+	padding: 20px 50px;
+	border-radius: 3px;
+	color: black;
+	text-decoration: none;
+	font-size: 25px;
+	transition: top .25s;
+}
+
+#loginButton a:hover {
+	text-decoration: none;
+	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
+	top: 49%;
+}
+
 .spacer {
 	width: 100% !important;
 	height: 10px;
