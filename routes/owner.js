@@ -14,7 +14,7 @@ router.post('/auth', function(req, res, next) {
 	res.send("Authentication Not Yet Implemented.");
 });
 
-router.post('register', function(req, res, next) {
+router.post('/register', function(req, res, next) {
 	var body = req.body;
 	console.log(body);
 	res.send("userCreation Not Yet Implemented.");

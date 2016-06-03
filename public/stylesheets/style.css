@@ -134,6 +134,10 @@ a:hover {
 
 /******************************/
 
+.close {
+	cursor: pointer;
+}
+
 #buttons {
 	display: inline-flex;
 	position: absolute;
@@ -144,6 +148,10 @@ a:hover {
 #buttons div {
 	padding-right: 10px;
 	padding-left: 10px;
+}
+
+#buttons div a {
+	cursor: pointer;
 }
 
 #buttons div a:hover {
@@ -204,6 +212,10 @@ a:hover {
 }
 
 /******************************/
+
+#loginForm {
+	display: none;
+}
 
 footer {
 	background: black;
