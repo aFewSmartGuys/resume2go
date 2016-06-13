@@ -19,6 +19,7 @@
 	}
 
 	Content.prototype.setContent = function(args) {
+		if (!args) { return; }
 		this.meta = {
 			title: args.title || "No Title Set",
 			mainImage: args.mainImage || "",
@@ -27,12 +28,28 @@
 		this.content = args.content || [];
 	};
 
+	Content.prototype.toString = function() {
+		var obj = {
+			meta: this.meta,
+			content: this.content
+		};
+		return JSON.stringify(obj);
+	}
+
 	Content.prototype.getTitle = function() {
 		return this.meta.title;
 	};
 
 	Content.prototype.getMainImage = function() {
 		return this.meta.mainImage;
+	};
+
+	Content.prototype.getPhone = function() {
+		return this.meta.phone;
+	};
+
+	Content.prototype.getContent = function() {
+		return this.content;
 	};
 
 	Content.prototype.getHeadings = function() {
