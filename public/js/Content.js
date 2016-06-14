@@ -11,19 +11,21 @@
 	function Content(args) {
 		args = args || {};
 		this.meta = {
-			title: args.title || "No Title Set",
-			mainImage: args.mainImage || "",
-			phone: args.phone || "No Phone Number Set"
+			title: args.meta.title || "",
+			mainImagePath: args.meta.mainImagePath || "",
+			phone: args.meta.phone || "",
+			identifier: args.meta.identifier || ""
 		};
 		this.content = args.content || [];
 	}
 
 	Content.prototype.setContent = function(args) {
-		if (!args) { return; }
+		if (!args || args.meta.identifier === "") { return; }
 		this.meta = {
-			title: args.title || "No Title Set",
-			mainImage: args.mainImage || "",
-			phone: args.phone || "No Phone Number Set"
+			title: args.meta.title || "",
+			mainImagePath: args.meta.mainImagePath || "",
+			phone: args.meta.phone || "",
+			identifier: args.meta.identifier || ""
 		};
 		this.content = args.content || [];
 	};
@@ -34,7 +36,11 @@
 			content: this.content
 		};
 		return JSON.stringify(obj);
-	}
+	};
+
+	Content.prototype.getIdentifier = function() {
+		return this.meta.identifier;
+	};
 
 	Content.prototype.getTitle = function() {
 		return this.meta.title;
@@ -50,6 +56,10 @@
 
 	Content.prototype.getContent = function() {
 		return this.content;
+	};
+
+	Content.prototype.getMetadata = function() {
+		return this.meta;
 	};
 
 	Content.prototype.getHeadings = function() {

@@ -33,7 +33,7 @@ router.post('/save', function(req, res, next) {
 router.get('/content', function(req, res, next) {
 	Portfolio.get().then(function(data){
 		res.setHeader("Content-Type", "application/json");
-		res.json(data.length > 0 ? data[0] : {});
+		res.json(data || {error: "Could not find any portfolios"});
 	}, function(err){
 		console.log("error getting the content");
 		res.setHeader("Content-Type", "application/json");

@@ -2,20 +2,16 @@ var app = angular.module("app", []);
 
 app.controller("mainCtrl", mainCtrl);
 
-// Get the content from the backend
-var content = new Rezoomae.classes.Content();
-
-$.getJSON("/content", function(data){
-	console.log(data);
-	content.setContent(data);
-});
-
 function mainCtrl($scope) {
-	$scope.title = content.getTitle();
-	$scope.mainImagePath = content.getMainImage();
-	$scope.phone = content.getPhone();
+	// Get the content from the backend
+	var content;
 
-	$scope.content = content.getContent();
+	$.getJSON("/content", function(data) {
+		content = new Rezoomae.classes.Content(data);
+
+		$scope.meta = content.meta;
+		$scope.content = content.getContent();
+	});
 
 	$scope.save = function() {
 		//spinner
@@ -31,14 +27,17 @@ function mainCtrl($scope) {
 			}
 		};
 		req.open("POST", "/save");
+		content.setContent({meta:$scope.meta, content:$scope.content});
+		console.log(content.toString());
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(content.toString());
 	};
+
 	$scope.newSection = function() {
 		$scope.content.push({title:"", content: ""})
 	};
+
 	$scope.removeSection = function(section) {
 		$scope.content.splice($scope.content.indexOf(section), 1)
 	};
 }
-

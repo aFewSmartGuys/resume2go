@@ -27,9 +27,10 @@
 			<div id="new" class="l-box-lrg pure-u-3 pure-u-md-3-5">
 				<form class="pure-form ">
 					<fieldset>
-						<input id="title" type="text" placeholder="Title" ng-value="title"><br>
-						<input id="mainImagePath" type="text" placeholder="Main Image Path" ng-value="mainImagePath"><br>
-						<input id="phone" type="text" placeholder="Phone Number" ng-value=phone><br>
+						<input id="title" type="text" placeholder="Title" ng-value="title" ng-model="meta.title"><br>
+						<input id="mainImagePath" type="text" placeholder="Main Image Path" ng-value="mainImagePath" ng-model="meta.mainImagePath"><br>
+						<input id="phone" type="text" placeholder="Phone Number" ng-value=phone ng-model="meta.phone"><br>
+						<input id="identifier" type="text" placeholder="Identifier For this Portfolio" ng-value="identifier" ng-model="meta.identifier"><br>
 						<h3>Sections</h3>
 						<div>
 							<ul id="sections">
