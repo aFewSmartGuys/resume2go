@@ -10,6 +10,8 @@
 	 */
 	function Content(args) {
 		args = args || {};
+		if (!args.meta) { args.meta = {}; }
+		if (!args.content) { args.content = []; }
 		this.meta = {
 			title: args.meta.title || "",
 			mainImagePath: args.meta.mainImagePath || "",
@@ -20,7 +22,9 @@
 	}
 
 	Content.prototype.setContent = function(args) {
-		if (!args || args.meta.identifier === "") { return; }
+		args = args || {};
+		if (!args.meta) { args.meta = {}; }
+		if (!args.content) { args.content = []; }
 		this.meta = {
 			title: args.meta.title || "",
 			mainImagePath: args.meta.mainImagePath || "",
