@@ -43,13 +43,6 @@ function resumeButton() {
 }
 
 $(document).ready(function() {
-	
-	// resume button scroll functionality
-	$("#floatingButton").click(function() {
-	    $('html, body').animate({
-	        scrollTop: $("#Education").offset().top
-		    }, 500);
-		});
 
 	$("#educationButton").click(function() {
 	    $('html, body').animate({

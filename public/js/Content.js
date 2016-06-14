@@ -47,7 +47,7 @@
 	};
 
 	Content.prototype.getMainImage = function() {
-		return this.meta.mainImage;
+		return this.meta.mainImagePath;
 	};
 
 	Content.prototype.getPhone = function() {
@@ -63,7 +63,7 @@
 	};
 
 	Content.prototype.getHeadings = function() {
-		return this.content.map(function(o){return Object.keys(o)[0];});
+		return this.content.map(function(o){return o.title;});
 	};
 
 	Content.prototype.contentList = function() {

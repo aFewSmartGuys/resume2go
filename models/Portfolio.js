@@ -34,7 +34,7 @@ module.exports = {
   write: function(updatedContent) {
     console.log(updatedContent);
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOneAndUpdate({'identifier':updatedContent.identifier},updatedContent,{upsert:true}, function(err, doc) {
+      Rezoomae.findOneAndUpdate({'identifier':updatedContent.meta.identifier},updatedContent,{upsert:true}, function(err, doc) {
         if (err) {
           reject(err);
         } else {

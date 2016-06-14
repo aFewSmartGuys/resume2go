@@ -1,37 +1,33 @@
 var app = angular.module("app", ["ngSanitize"]);
 
-app.controller("titleController", title);
-app.controller("topController", topController);
-app.controller("contentController", contentController);
+app.controller("mainCtrl", ['$scope', '$http', mainCtrl]);
 
 app.directive("heading", headingDirective);
 app.directive("content", contentDirective);
 
-// Get the content from the backend
-var content = new Rezoomae.classes.Content({});
 
-$.getJSON("/content", function(data){
-	console.log(data);
-	content.setContent(data);
-});
+function mainCtrl($scope, $http) {
+	// Get the content from the backend
+	var content;
+	
+	$http({
+		method: "GET",
+		url: "/content"
+	}).then(function(data){
+		content = new Rezoomae.classes.Content(data.data);
+		$scope.title = content.getTitle();
+		$scope.mainImagePath = content.getMainImage();
+		$scope.headings = content.getHeadings();
 
-function title($scope) {
-	$scope.title = content.getTitle();
-}
-
-function topController($scope) {
-	$scope.title = content.getTitle();
-	$scope.mainImagePath = content.getMainImage();
-	$scope.headings = content.getHeadings();
+		$scope.contentList = content.getContent();
+	}, function(err) {
+		console.log("There was an error loading content");
+	});
 	$scope.scrollToContent = function(name){
 	    $('html, body').animate({
 	        scrollTop: $("#"+name).offset().top
 		}, 500);
 	};
-}
-
-function contentController($scope) {
-	$scope.contentList = content.contentList();
 }
 
 function headingDirective() {

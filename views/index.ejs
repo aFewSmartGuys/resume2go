@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="app">
-<head ng-controller="titleController">
+<html ng-app="app" ng-controller="mainCtrl">
+<head>
 	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<!--[if lt IE 9]>
@@ -10,7 +10,7 @@
 
 <body onload="normalize()" onresize="normalize()" onmousemove="normalize()" onscroll="normalize()" ng-cloak>
 
-	<div ng-controller="topController">
+	<div>
 		<!-- LOGO -->	
 		<a href="#top" id="logo">{{title}}</a>
 
@@ -22,17 +22,17 @@
 
 		<!-- Photo -->
 		<div id="imgDiv">
-			<img src="{{mainImagePath}}" alt="homePhoto" id="home1" ng-cloak>
+			<img ng-src="{{mainImagePath}}" alt="homePhoto" id="home1" ng-cloak>
 		</div>
 
 		<div id="floatingButton">
-			<a href="" id="floatingLink"><b>See Resum&eacute;</b></a>
+			<a href="" id="floatingLink" ng-click="scrollToContent(headings[0])"><b>See Resum&eacute;</b></a>
 		</div>
 
 		<div class="spacer"></div>
 	</div>
 
-	<div ng-controller="contentController" id="content">
+	<div id="content">
 
 		<div ng-repeat="content in contentList">
 			<content></content>
