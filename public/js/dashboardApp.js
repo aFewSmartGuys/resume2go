@@ -1,16 +1,21 @@
 var app = angular.module("app", []);
 
-app.controller("mainCtrl", mainCtrl);
+app.controller("mainCtrl", ['$scope', '$http', mainCtrl]);
 
-function mainCtrl($scope) {
+function mainCtrl($scope, $http) {
 	// Get the content from the backend
 	var content;
 
-	$.getJSON("/content", function(data) {
-		content = new Rezoomae.classes.Content(data);
+	$http({
+		method: "GET",
+		url: "content"
+	}).then(function(data) {
+		content = new Rezoomae.classes.Content(data.data);
 
 		$scope.meta = content.meta;
 		$scope.content = content.getContent();
+	}, function(err) {
+		console.log("Error getting content");
 	});
 
 	$scope.save = function() {
