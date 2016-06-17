@@ -25,7 +25,7 @@
 	</div>
 	<div class="content" ng-controller="mainCtrl">
 		<div>
-			<select ng-options="id for id in ids" ng-model="currId"></select>
+			<select ng-change="viewPortfolio()" ng-options="id for id in ids" ng-model="currId"></select>
 		</div>
 		<div class="pure-g">
 			<div id="new" class="l-box-lrg pure-u-3 pure-u-md-3-5">

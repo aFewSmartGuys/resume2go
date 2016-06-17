@@ -12,9 +12,8 @@ function mainCtrl($scope, $http) {
 	}).then(function(data) {
 		content = new Rezoomae.classes.Content(data.data);
 		
-		$scope.currId = "";
 		$scope.ids = content.getIds();
-		
+		$scope.currId = !!$scope.ids ? $scope.ids[0] : "";
 		$scope.meta = content.findById($scope.currId).meta;
 		$scope.content = content.findById($scope.currId).content;
 	}, function(err) {
@@ -23,8 +22,9 @@ function mainCtrl($scope, $http) {
 
 	$scope.save = function() {
 		content.update({meta:$scope.meta, content:$scope.content});
-		$scope.ids.push($scope.meta.id);
+		$scope.ids = content.getIds();
 		$scope.currId = $scope.meta.id;
+		console.log(content.toString($scope.currId));
 		//spinner
 		$http({
 			method: "POST",
@@ -49,9 +49,10 @@ function mainCtrl($scope, $http) {
 		$scope.content.splice($scope.content.indexOf(section), 1)
 	};
 
-	$scope.viewPortfolio = function(id) {
+	$scope.viewPortfolio = function() {
 		//save the current portfolio first???
-		$scope.meta = content.findById(id).meta;
-		$scope.content = content.findById(id).content;
+		var portfolio = content.findById($scope.currId);
+		$scope.meta = portfolio.meta;
+		$scope.content = portfolio.content;
 	};
 }
