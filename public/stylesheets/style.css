@@ -180,6 +180,16 @@ a:hover {
 	transition: top .25s;
 }
 
+.registerButton a {
+	background: green;
+	padding: 20px 50px;
+	border-radius: 3px;
+	color: black;
+	text-decoration: none;
+	font-size: 25px;
+	transition: top .25s;
+}
+
 /******************************/
 
 .spacer {
@@ -214,6 +224,10 @@ a:hover {
 /******************************/
 
 #loginForm {
+	display: none;
+}
+
+#registerForm {
 	display: none;
 }
 

@@ -18,9 +18,25 @@
 		<div class="loginButton">
 			<a>Login</a>
 		</div>
+		<div class="registerButton">
+			<a>Register</a>
+		</div>
+	</div>
+	<div id="registerForm">
+		<span class="close" id="closeRegister">&times;</span>
+		<form action="/owner/register" method="POST">
+			<label for="name">Name</label>
+			<input name="name" type="text">
+			<label for="password">Password</label>
+			<input name="password" type="password">
+			<label for="password2">Re-Type Password</label>
+			<input name="password2" type="password">
+			<input type="hidden" name="authType" value="password">
+			<input type="submit">
+		</form>
 	</div>
 	<div id="loginForm">
-		<span class="close">&times;</span>
+		<span class="close" id="closeLogin">&times;</span>
 		<form action="/owner/register" method="POST">
 			<label for="name">Name</label>
 			<input name="name" type="text">
@@ -34,20 +50,34 @@
 </div>
 
 <div class="loginFooter">
-		<p>&copy;Copyright 2016</p>
+		<p></p>
 </div>
 <script>
-	var form = document.getElementById("loginForm");
+	var registerform = document.getElementById("registerForm");
+	var loginform = document.getElementById("loginForm");
+
 	var buttons = document.getElementById("buttons");
 	var loginButton = document.querySelector(".loginButton");
-	var closeForm = document.querySelector("span");
+	var registerButton = document.querySelector(".registerButton");
+	
+	var closeLogin = document.getElementById("closeLogin");
+	var closeRegister = document.getElementById("closeRegister");
+
+	registerButton.addEventListener("click", function() {
+		buttons.style.display = "none";
+		registerform.style.display = "block";
+	});
 	loginButton.addEventListener("click", function() {
 		buttons.style.display = "none";
-		form.style.display = "block";
+		loginform.style.display = "block";
 	});
-	closeForm.addEventListener("click", function() {
+	closeRegister.addEventListener("click", function() {
 		buttons.style.display = "inline-flex";
-		form.style.display = "none";
+		registerform.style.display = "none";
+	});
+	closeLogin.addEventListener("click", function() {
+		buttons.style.display = "inline-flex";
+		loginform.style.display = "none";
 	});
 </script>
 </body>
