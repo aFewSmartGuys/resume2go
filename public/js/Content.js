@@ -1,82 +1,82 @@
 (function(Rezoomae){
+	"use strict";
 
 	if (!Rezoomae) {
 		console.log("Rezoomae not initialized.", "Include Rezoomae.js first.");
 		return;
 	}
 
+	function emptyPortfolio() {
+		return {
+			meta: {
+				title: "",
+				mainImagePath: "",
+				phone: "",
+				id: ""
+			},
+			content: []
+		}
+	}
+
 	/**
 	 * class that will hold the content for the current resume
 	 */
 	function Content(args) {
-		args = args || {};
-		if (!args.meta) { args.meta = {}; }
-		if (!args.content) { args.content = []; }
-		this.meta = {
-			title: args.meta.title || "",
-			mainImagePath: args.meta.mainImagePath || "",
-			phone: args.meta.phone || "",
-			identifier: args.meta.identifier || ""
-		};
-		this.content = args.content || [];
+		this.portfolios = [];
+		var that = this;
+		args = args || [];
+
+		args.forEach(function(portfolio) {
+			var newPortfolio = {};
+			if (!portfolio.meta) { portfolio.meta = {}; }
+			if (!portfolio.content) { portfolio.content = []; }
+			newPortfolio.meta = {
+				title: portfolio.meta.title || "",
+				mainImagePath: portfolio.meta.mainImagePath || "",
+				phone: portfolio.meta.phone || "",
+				id: portfolio.meta.id || ""
+			};
+			newPortfolio.content = portfolio.content || [];
+
+			that.portfolios.push(newPortfolio);
+		});
 	}
 
-	Content.prototype.setContent = function(args) {
-		args = args || {};
-		if (!args.meta) { args.meta = {}; }
-		if (!args.content) { args.content = []; }
-		this.meta = {
-			title: args.meta.title || "",
-			mainImagePath: args.meta.mainImagePath || "",
-			phone: args.meta.phone || "",
-			identifier: args.meta.identifier || ""
-		};
-		this.content = args.content || [];
-	};
-
-	Content.prototype.toString = function() {
-		var obj = {
-			meta: this.meta,
-			content: this.content
-		};
+	Content.prototype.toString = function(id) {
+		var obj = this.portfolios.find(function(p) {
+			return p.meta.id === id;
+		}) || emptyPortfolio();
 		return JSON.stringify(obj);
 	};
 
-	Content.prototype.getIdentifier = function() {
-		return this.meta.identifier;
+	Content.prototype.findById = function(id) {
+		return this.portfolios.find(function(p) {
+			return p.meta.id === id;
+		}) || emptyPortfolio();
 	};
 
-	Content.prototype.getTitle = function() {
-		return this.meta.title;
-	};
-
-	Content.prototype.getMainImage = function() {
-		return this.meta.mainImagePath;
-	};
-
-	Content.prototype.getPhone = function() {
-		return this.meta.phone;
-	};
-
-	Content.prototype.getContent = function() {
-		return this.content;
-	};
-
-	Content.prototype.getMetadata = function() {
-		return this.meta;
-	};
-
-	Content.prototype.getHeadings = function() {
-		return this.content.map(function(o){return o.title;});
-	};
-
-	Content.prototype.contentList = function() {
-		return this.content.map(function(o){
-			return {
-				title: Object.keys(o)[0],
-				content: o[Object.keys(o)[0]]
-			}
+	Content.prototype.getIds = function() {
+		return this.portfolios.map(function(p){
+			return p.meta.id;
 		});
+	};
+
+	Content.prototype.update = function(port) {
+		var that = this;
+		var updated = false;
+		this.portfolios.some(function(p) {
+			if (p.meta.id === port.meta.id) {
+				console.log("updating");
+				console.log(p);
+				that.portfolios[that.portfolios.indexOf(p)] = port;
+				updated = true;
+			}
+			return updated;
+		});
+		if (!updated) {
+			console.log("inserting new portfolio: Content.update(...)");
+			this.portfolios.push(port);
+		}
 	};
 
 	Rezoomae.classes.Content = Content;

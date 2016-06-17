@@ -14,19 +14,9 @@ router.get('/login', function(req, res, next) {
 
 /* GET dashboard page. */
 router.get('/dashboard', function(req, res, next) {
-  res.render('dashboard', { title: 'Express' });
-});
-
-/* POST save updated content to the database */
-router.post('/save', function(req, res, next) {
-	Portfolio.write(req.body).then(function(data) {
-		res.setHeader("Content-Type", "application/json");
-		res.json("{response:" + data + "}");
-	}, function(err) {
-		console.log("error saving updated content");
-		res.setHeader("Content-Type", "application/json");
-		res.status(500).json(err);
-	});
+	// authenticate the user
+	//reroute the user to the dashboard page
+	res.redirect("/owner/dashboard");
 });
 
 /* GET the json content from the mongo db */

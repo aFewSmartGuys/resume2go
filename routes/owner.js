@@ -1,11 +1,40 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('../services/google');
+var Portfolio = require('../models/Portfolio');
 
 router.get('/', function(req, res, next) {
 	//check cookie
 	// send to dashboard if session exists
 	res.render('login');
+});
+
+router.get('/dashboard', function(req, res, next) {
+	res.render("dashboard");
+});
+
+/* POST save updated content to the database */
+router.post('/save', function(req, res, next) {
+	Portfolio.write(req.body).then(function(data) {
+		res.setHeader("Content-Type", "application/json");
+		res.json("{response:" + data + "}");
+	}, function(err) {
+		console.log("error saving updated content");
+		res.setHeader("Content-Type", "application/json");
+		res.status(500).json(err);
+	});
+});
+
+/* GET the json content from the mongo db */
+router.get('/content', function(req, res, next) {
+	Portfolio.getAll().then(function(data){
+		res.setHeader("Content-Type", "application/json");
+		res.json(data || {error: "Could not find any portfolios"});
+	}, function(err){
+		console.log("error getting the content");
+		res.setHeader("Content-Type", "application/json");
+		res.status(500).json(err);
+	});
 });
 
 router.post('/auth', function(req, res, next) {

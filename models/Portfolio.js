@@ -5,7 +5,7 @@ var portfolioSchema = dbo.Schema({
       title: String,
       mainImagePath: String,
       phone: String,
-      identifier: { type : String , unique : true, required : true, dropDups: true }
+      id: { type : String , unique : true, required : true, dropDups: true }
     },
     content: [{
       title: String,
@@ -18,9 +18,25 @@ var Rezoomae = dbo.model('Rezoomae', portfolioSchema);
 
 module.exports = {
 
-  get: function() {
+  /**
+   * @param id is the string used to identify a specific portfolio
+   */
+  get: function(id) {
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOne({}, function(err, content) {
+      Rezoomae.findOne({"id": id}, function(err, content) {
+        if (err) {
+          console.log(err);
+          reject(err);
+        }
+        console.log(content);
+        resolve(content);
+      });
+    });
+  },
+
+  getAll: function() {
+    return new Promise(function(resolve, reject) {
+      Rezoomae.find({}, function(err, content) {
         if (err) {
           console.log(err);
           reject(err);
@@ -32,9 +48,9 @@ module.exports = {
   },
 
   write: function(updatedContent) {
-    console.log(updatedContent);
+    console.log(updatedContent.meta.id);
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOneAndUpdate({'identifier':updatedContent.meta.identifier},updatedContent,{upsert:true}, function(err, doc) {
+      Rezoomae.findOneAndUpdate({'id':updatedContent.meta.id},updatedContent,{upsert:true}, function(err, doc) {
         if (err) {
           reject(err);
         } else {

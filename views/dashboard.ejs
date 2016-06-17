@@ -2,7 +2,8 @@
 <html ng-app="app">
 <head>
 	<title>Dashboard</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="stylesheets/style.css"> -->
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -23,6 +24,9 @@
 			</div>
 	</div>
 	<div class="content" ng-controller="mainCtrl">
+		<div>
+			<select ng-options="id for id in ids" ng-model="currId"></select>
+		</div>
 		<div class="pure-g">
 			<div id="new" class="l-box-lrg pure-u-3 pure-u-md-3-5">
 				<form class="pure-form ">
@@ -30,7 +34,7 @@
 						<input id="title" type="text" placeholder="Title" ng-value="title" ng-model="meta.title"><br>
 						<input id="mainImagePath" type="text" placeholder="Main Image Path" ng-value="mainImagePath" ng-model="meta.mainImagePath"><br>
 						<input id="phone" type="text" placeholder="Phone Number" ng-value=phone ng-model="meta.phone"><br>
-						<input id="identifier" type="text" placeholder="Identifier For this Portfolio" ng-value="identifier" ng-model="meta.identifier"><br>
+						<input id="id" type="text" placeholder="Id For this Portfolio" ng-value="id" ng-model="meta.id" required><br>
 						<h3>Sections</h3>
 						<div>
 							<ul id="sections">
@@ -57,8 +61,8 @@
 </footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="js/Rezoomae.js"></script>
-	<script src="js/Content.js"></script>
-	<script src="js/dashboardApp.js"></script>
+	<script src="/js/Rezoomae.js"></script>
+	<script src="/js/Content.js"></script>
+	<script src="/js/dashboardApp.js"></script>
 </body>
 </html>

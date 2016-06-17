@@ -37,4 +37,8 @@ OwnerSchema.methods.comparePassword = function(candidatePassword, cb) {
 	});
 };
 
-module.exports = dbo.model("Rezoomae", OwnerSchema);
+var OwnerModel = dbo.model("Rezoomae", OwnerSchema);
+
+module.exports = {
+	
+};

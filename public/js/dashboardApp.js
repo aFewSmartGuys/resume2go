@@ -11,31 +11,34 @@ function mainCtrl($scope, $http) {
 		url: "content"
 	}).then(function(data) {
 		content = new Rezoomae.classes.Content(data.data);
-
-		$scope.meta = content.meta;
-		$scope.content = content.getContent();
+		
+		$scope.currId = "";
+		$scope.ids = content.getIds();
+		
+		$scope.meta = content.findById($scope.currId).meta;
+		$scope.content = content.findById($scope.currId).content;
 	}, function(err) {
 		console.log("Error getting content");
 	});
 
 	$scope.save = function() {
+		content.update({meta:$scope.meta, content:$scope.content});
+		$scope.ids.push($scope.meta.id);
+		$scope.currId = $scope.meta.id;
 		//spinner
-		var req = new XMLHttpRequest();
-		req.onreadystatechange = function() {
-			if (req.readyState == 4) {
-				console.log(req.status);
-				if (req.status == 200) {
-					console.log(req.responseText);
-				} else {
-					console.log("Error", req.statusText);
-				}
-			}
-		};
-		req.open("POST", "/save");
-		content.setContent({meta:$scope.meta, content:$scope.content});
-		console.log(content.toString());
-		req.setRequestHeader("Content-Type", "application/json");
-		req.send(content.toString());
+		$http({
+			method: "POST",
+			url: "save",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: content.toString($scope.currId)
+		}).then(function(data) {
+			console.log(data);
+			console.log("saved");
+		}, function(err) {
+			console.log(err.data);
+		});
 	};
 
 	$scope.newSection = function() {
@@ -44,5 +47,11 @@ function mainCtrl($scope, $http) {
 
 	$scope.removeSection = function(section) {
 		$scope.content.splice($scope.content.indexOf(section), 1)
+	};
+
+	$scope.viewPortfolio = function(id) {
+		//save the current portfolio first???
+		$scope.meta = content.findById(id).meta;
+		$scope.content = content.findById(id).content;
 	};
 }
