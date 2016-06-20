@@ -99,13 +99,13 @@ module.exports = {
 
 	getPortfolio: function(name) {
 		return new Promise(function(resolve, reject) {
-			User.findOne({name: name}, 'portfolio', function(err, portfolio) {
+			User.findOne({name: name}, function(err, user) {
 				if (err) {
 					reject("Database error");
 					return;
 				}
-				if (portfolio) {
-					resolve(portfolio);
+				if (user) {
+					resolve(user.portfolio);
 				} else {
 					reject("User not found");
 				}

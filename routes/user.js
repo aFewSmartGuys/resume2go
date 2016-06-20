@@ -26,7 +26,8 @@ router.get('/', sessionCheck, function(req, res, next) {
 });
 
 /* POST save updated content to the database */
-router.post('/save', function(req, res, next) {
+router.post('/save', sessionCheck, function(req, res, next) {
+	console.log("in the save function");
 	Portfolio.write(req.body).then(function(data) {
 		res.status(200);
 	}, function(err) {
@@ -36,17 +37,14 @@ router.post('/save', function(req, res, next) {
 });
 
 /* GET all json content from the mongo db */
-router.get('/content', sessionCheck, function(req, res, next) {
+router.get('/content', function(req, res, next) {
 	console.log("Getting all content");
 	Portfolio.getAll().then(function(data){
 		res.setHeader("Content-Type", "application/json");
-		console.log("The data returned from getAll portfolios");
-		console.log(data);
 		res.json(data || {error: "Could not find any portfolios"});
 	}, function(err){
-		console.log("error getting the content");
 		res.setHeader("Content-Type", "application/json");
-		res.status(500);
+		res.status(500).json([]);
 	});
 });
 
@@ -75,7 +73,9 @@ router.post('/login', function(req, res, next) {
 		password = body.password || "";
 	User.login({name:name, password:password}).then(function(responseText) {
 		//set the session
+		console.log("Trying to create the session for the user");
 		req.session.name = name;
+		console.log(req.session);
 		res.render("dashboard");
 	}, function(responseText) {
 		req.session.reset();

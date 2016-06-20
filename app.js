@@ -27,8 +27,8 @@ app.use(sessions({
 }));
 
 app.use(function(req, res, next) {
-  console.log("In the middleware broski");
   if (req.session && req.session.name) {
+	console.log("session name: " + req.session.name);
     User.getPortfolio({ name: req.session.name }).then(function(portfolio) {
       res.locals.portfolio = portfolio;
     }, function(msg) {
@@ -37,7 +37,6 @@ app.use(function(req, res, next) {
     });
   }
   console.log("going to next");
-  console.log(next);
   next();
 });
 
