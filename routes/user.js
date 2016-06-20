@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../services/google');
 var Portfolio = require('../models/Portfolio');
+var User = require("../models/User");
 
 router.get('/', function(req, res, next) {
 	//check cookie
@@ -9,9 +10,9 @@ router.get('/', function(req, res, next) {
 	res.render('login');
 });
 
-router.get('/dashboard', function(req, res, next) {
-	res.render("dashboard");
-});
+// router.get('/dashboard', function(req, res, next) {
+// 	res.render("dashboard");
+// });
 
 /* POST save updated content to the database */
 router.post('/save', function(req, res, next) {
@@ -25,7 +26,7 @@ router.post('/save', function(req, res, next) {
 	});
 });
 
-/* GET the json content from the mongo db */
+/* GET all json content from the mongo db */
 router.get('/content', function(req, res, next) {
 	Portfolio.getAll().then(function(data){
 		res.setHeader("Content-Type", "application/json");
@@ -37,33 +38,40 @@ router.get('/content', function(req, res, next) {
 	});
 });
 
+router.post('/register', function(req, res, next) {
+	var body = req.body;
+	if (body.password !== body.password2) {
+		res.json({error: "Passwords do not match."});
+	} else {
+		User.register({
+			name: body.name,
+			password: body.password,
+			authType: "password",
+			portfolio: body.portfolio || ""
+		}).then(function(responseText) {
+			res.json({success:responseText});
+		}, function(responseText) {
+			res.json({error:responseText});
+		});
+	}
+});
+
+router.post('/login', function(req, res, next) {
+	var body = req.body,
+		name = body.name || "",
+		password = body.password || "";
+	User.login({name:name, password:password}).then(function(responseText) {
+		//set the session
+		res.render("dashboard");
+	}, function(responseText) {
+		res.json({error:responseText});
+	});
+});
+
 router.post('/auth', function(req, res, next) {
 	var body = req.body;
 	console.log(body);
 	res.send("Authentication Not Yet Implemented.");
-});
-
-router.post('/register', function(req, res, next) {
-	var body = req.body;
-	console.log("asdfasdf");
-	var Owner = require("../models/Owner");
-	console.log("asdfasdf");
-	var testowner = new Owner({name: body.name, password: body.password, authType: body.authType});
-	console.log("asdfasdf");
-	testowner.save(function(err) {
-		if (err) throw err;
-		console.log("hi");
-		Owner.find({}, function(err, owner) {
-		console.log("hi");
-			if (err) throw err;
-			console.log(owner);
-			owner.comparePassword(body.password, function(err, isMatch) {
-				if (err) throw err;
-				console.log(body.password, isMatch);
-				res.send(isMatch);
-			});
-		});
-	});
 });
 
 // GET /auth/google

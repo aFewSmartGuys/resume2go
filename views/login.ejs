@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<!--[if lt IE 9]>
   	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -13,7 +13,7 @@
 	<h1>login</h1>
 	<div id="buttons">
 		<div class="googleButton">
-			<a href="/owner/auth/google">Google</a>
+			<a href="/user/auth/google">Google</a>
 		</div>
 		<div class="loginButton">
 			<a>Login</a>
@@ -24,7 +24,7 @@
 	</div>
 	<div id="registerForm">
 		<span class="close" id="closeRegister">&times;</span>
-		<form action="/owner/register" method="POST">
+		<form action="/user/register" method="POST">
 			<label for="name">Name</label>
 			<input name="name" type="text">
 			<label for="password">Password</label>
@@ -37,7 +37,7 @@
 	</div>
 	<div id="loginForm">
 		<span class="close" id="closeLogin">&times;</span>
-		<form action="/owner/register" method="POST">
+		<form action="/user/login" method="POST">
 			<label for="name">Name</label>
 			<input name="name" type="text">
 			<label for="password">Password</label>

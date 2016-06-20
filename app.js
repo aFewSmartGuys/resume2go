@@ -6,7 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var owner = require('./routes/owner');
+var user = require('./routes/user');
+
+// create the connection to mongoDB
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/rezoomae');
+db.connection.on('error', console.error.bind(console, 'connection error:'));
+db.connection.once('open', function() { console.log('Connected to database.'); });
 
 var app = express();
 
@@ -23,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/owner', owner);
+app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

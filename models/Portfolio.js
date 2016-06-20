@@ -1,6 +1,6 @@
-var dbo = require('./dbo');
+var mongoose = require("mongoose");
 
-var portfolioSchema = dbo.Schema({
+var portfolioSchema = mongoose.Schema({
     meta:{
       title: String,
       mainImagePath: String,
@@ -11,10 +11,9 @@ var portfolioSchema = dbo.Schema({
       title: String,
       content: String
     }]
-  },
-  {collection: 'portfolio'});
+  });
 
-var Rezoomae = dbo.model('Rezoomae', portfolioSchema);
+var Rezoomae = mongoose.model('Portflio', portfolioSchema);
 
 module.exports = {
 
@@ -50,7 +49,8 @@ module.exports = {
   write: function(updatedContent) {
     console.log(updatedContent);
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOneAndUpdate({'id':updatedContent.meta.id},updatedContent,{
+      Rezoomae.findOneAndUpdate({'id':updatedContent.meta.id},updatedContent,
+      {
         upsert:true,
         returnNewDocument: true
       }, function(err, doc) {
@@ -60,7 +60,7 @@ module.exports = {
           console.log(doc);
           resolve(doc);
         }
-      })
+      });
     });
   }
 };
