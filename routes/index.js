@@ -4,14 +4,7 @@ var Portfolio = require('../models/Portfolio');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-/* GET dashboard page. */
-router.get('/dashboard', function(req, res, next) {
-	// authenticate the user
-	//reroute the user to the dashboard page
-	res.redirect("/owner/dashboard");
+  res.render('index');
 });
 
 /* GET the json content from the mongo db */

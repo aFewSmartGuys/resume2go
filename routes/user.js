@@ -4,37 +4,49 @@ var passport = require('../services/google');
 var Portfolio = require('../models/Portfolio');
 var User = require("../models/User");
 
-router.get('/', function(req, res, next) {
-	//check cookie
-	// send to dashboard if session exists
+function sessionCheck(req, res, next) {
+	console.log("In session check")
+	console.log(req.session);
+	if (req.session && req.session.name) {
+		console.log("Going to next");
+		next();
+	} else {
+		console.log("redirecting to login");
+		res.render('login');
+	}
+}
+
+router.get('/logout', function(req, res, next) {
+	req.session.reset();
 	res.render('login');
 });
 
-// router.get('/dashboard', function(req, res, next) {
-// 	res.render("dashboard");
-// });
+router.get('/', sessionCheck, function(req, res, next) {
+	res.render('dashboard');
+});
 
 /* POST save updated content to the database */
 router.post('/save', function(req, res, next) {
 	Portfolio.write(req.body).then(function(data) {
-		res.setHeader("Content-Type", "application/json");
-		res.json("{response:" + data + "}");
+		res.status(200);
 	}, function(err) {
 		console.log("error saving updated content");
-		res.setHeader("Content-Type", "application/json");
-		res.status(500).json(err);
+		res.status(500);
 	});
 });
 
 /* GET all json content from the mongo db */
-router.get('/content', function(req, res, next) {
+router.get('/content', sessionCheck, function(req, res, next) {
+	console.log("Getting all content");
 	Portfolio.getAll().then(function(data){
 		res.setHeader("Content-Type", "application/json");
+		console.log("The data returned from getAll portfolios");
+		console.log(data);
 		res.json(data || {error: "Could not find any portfolios"});
 	}, function(err){
 		console.log("error getting the content");
 		res.setHeader("Content-Type", "application/json");
-		res.status(500).json(err);
+		res.status(500);
 	});
 });
 
@@ -49,7 +61,8 @@ router.post('/register', function(req, res, next) {
 			authType: "password",
 			portfolio: body.portfolio || ""
 		}).then(function(responseText) {
-			res.json({success:responseText});
+			req.session.name = body.name;
+			res.render('dashboard', {success:responseText});
 		}, function(responseText) {
 			res.json({error:responseText});
 		});
@@ -62,9 +75,11 @@ router.post('/login', function(req, res, next) {
 		password = body.password || "";
 	User.login({name:name, password:password}).then(function(responseText) {
 		//set the session
+		req.session.name = name;
 		res.render("dashboard");
 	}, function(responseText) {
-		res.json({error:responseText});
+		req.session.reset();
+		res.status(400).json({error: "error logging in."});
 	});
 });
 

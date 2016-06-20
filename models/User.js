@@ -25,7 +25,6 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-	console.log("asdfasdfasdf");
 	bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
 		if (err) return cb(err);
 		cb(null, isMatch);
@@ -76,7 +75,7 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			User.findOne({}, function(err, user) {
 				if (err) {
-					reject(err);
+					reject("User not found");
 					return;
 				}
 				if (user) {
@@ -85,14 +84,30 @@ module.exports = {
 					} else {
 						user.comparePassword(args.password, function(err, success) {
 							if (success) {
-								resolve("asdfasdf");
+								resolve("success");
 							} else {
-								reject("Incorrect Password");
+								reject("incorrect Password");
 							}
 						});
 					}
 				} else {
 					reject("A user has not been created.");
+				}
+			});
+		});
+	},
+
+	getPortfolio: function(name) {
+		return new Promise(function(resolve, reject) {
+			User.findOne({name: name}, 'portfolio', function(err, portfolio) {
+				if (err) {
+					reject("Database error");
+					return;
+				}
+				if (portfolio) {
+					resolve(portfolio);
+				} else {
+					reject("User not found");
 				}
 			});
 		});
