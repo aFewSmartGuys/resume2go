@@ -27,7 +27,6 @@ module.exports = {
           console.log(err);
           reject(err);
         }
-        console.log(content);
         resolve(content);
       });
     });
@@ -37,10 +36,9 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       Rezoomae.find({}, function(err, content) {
         if (err) {
-          console.log(err);
-          reject(err);
+        	console.log(err);
+        	reject(err);
         }
-        console.log(content);
         resolve(content);
       });
     });
@@ -57,7 +55,6 @@ module.exports = {
         if (err) {
           reject(err);
         } else {
-          console.log(doc);
           resolve(doc);
         }
       });

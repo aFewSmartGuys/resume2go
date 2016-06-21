@@ -19,26 +19,13 @@ var app = express();
 
 var sessions = require("client-sessions");
 app.use(sessions({
-  cookieName: 'session', // cookie name dictates the key name added to the request object
-  secret: 'akfj45qa$WERQ#$G[s]ELDF+nqowe', // should be a large unguessable string
-  duration: 45 * 60 * 1000, // how long the session will stay valid in ms
-  activeDuration: 5 * 60 * 1000, // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
-  ephemeral: true // resets the cookies when the browser closes
+  cookieName: 'session',
+  secret: 'akfj45qa$WERQ#$G[s]ELDF+nqowe',
+  duration: 45 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  ephemeral: true
 }));
 
-app.use(function(req, res, next) {
-  if (req.session && req.session.name) {
-	console.log("session name: " + req.session.name);
-    User.getPortfolio({ name: req.session.name }).then(function(portfolio) {
-      res.locals.portfolio = portfolio;
-    }, function(msg) {
-      console.log("Cookie middleware: " + msg);
-      req.session.reset();
-    });
-  }
-  console.log("going to next");
-  next();
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

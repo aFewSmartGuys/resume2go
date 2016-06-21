@@ -101,7 +101,7 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			User.findOne({name: name}, function(err, user) {
 				if (err) {
-					reject("Database error");
+					reject(err);
 					return;
 				}
 				if (user) {

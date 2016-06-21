@@ -5,13 +5,18 @@ var Portfolio = require('../models/Portfolio');
 var User = require("../models/User");
 
 function sessionCheck(req, res, next) {
-	console.log("In session check")
-	console.log(req.session);
 	if (req.session && req.session.name) {
-		console.log("Going to next");
+		User.getPortfolio(req.session.name).then(function(portfolio) {
+			res.locals.errMsg = null;
+			res.locals.portfolio = portfolio;
+		}, function(msg) {
+			res.local.errMsg = "Incorrect username.";
+			req.session.reset();
+			res.render('login');
+		});
 		next();
 	} else {
-		console.log("redirecting to login");
+		res.locals.errMsg = "You are not logged in";
 		res.render('login');
 	}
 }
@@ -27,7 +32,6 @@ router.get('/', sessionCheck, function(req, res, next) {
 
 /* POST save updated content to the database */
 router.post('/save', sessionCheck, function(req, res, next) {
-	console.log("in the save function");
 	Portfolio.write(req.body).then(function(data) {
 		res.status(200);
 	}, function(err) {
@@ -38,7 +42,6 @@ router.post('/save', sessionCheck, function(req, res, next) {
 
 /* GET all json content from the mongo db */
 router.get('/content', function(req, res, next) {
-	console.log("Getting all content");
 	Portfolio.getAll().then(function(data){
 		res.setHeader("Content-Type", "application/json");
 		res.json(data || {error: "Could not find any portfolios"});
@@ -73,9 +76,7 @@ router.post('/login', function(req, res, next) {
 		password = body.password || "";
 	User.login({name:name, password:password}).then(function(responseText) {
 		//set the session
-		console.log("Trying to create the session for the user");
 		req.session.name = name;
-		console.log(req.session);
 		res.render("dashboard");
 	}, function(responseText) {
 		req.session.reset();
@@ -85,7 +86,6 @@ router.post('/login', function(req, res, next) {
 
 router.post('/auth', function(req, res, next) {
 	var body = req.body;
-	console.log(body);
 	res.send("Authentication Not Yet Implemented.");
 });
 
