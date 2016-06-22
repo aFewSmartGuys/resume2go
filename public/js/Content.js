@@ -24,7 +24,10 @@
 	function Content(args) {
 		this.portfolios = [];
 		var that = this;
-		args = args || [];
+		
+		if (!(args instanceof Array)) {
+			args = [];
+		}
 
 		args.forEach(function(portfolio) {
 			var newPortfolio = {};

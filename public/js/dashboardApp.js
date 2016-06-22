@@ -10,10 +10,12 @@ function mainCtrl($scope, $http) {
 		method: "GET",
 		url: "content"
 	}).then(function(data) {
-		content = new Rezoomae.classes.Content(data.data);
+		var response = data.data;
+		content = new Rezoomae.classes.Content(response.portfolios);
 		
 		$scope.ids = content.getIds();
 		$scope.currId = !!$scope.ids ? $scope.ids[0] : "";
+		$scope.displayPortfolio = response.displayPortfolio || "";
 		$scope.meta = content.findById($scope.currId).meta;
 		$scope.content = content.findById($scope.currId).content;
 	}, function(err) {
@@ -54,5 +56,9 @@ function mainCtrl($scope, $http) {
 		var portfolio = content.findById($scope.currId);
 		$scope.meta = portfolio.meta;
 		$scope.content = portfolio.content;
+	};
+
+	$scope.updatePortfolio = function() {
+
 	};
 }

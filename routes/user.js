@@ -6,11 +6,11 @@ var User = require("../models/User");
 
 function sessionCheck(req, res, next) {
 	if (req.session && req.session.name) {
-		User.getPortfolio(req.session.name).then(function(portfolio) {
+		User.getDisplayPortfolio(req.session.name).then(function(portfolioId) {
 			res.locals.errMsg = null;
-			res.locals.portfolio = portfolio;
+			res.locals.displayPortfolio = portfolioId;
 		}, function(msg) {
-			res.local.errMsg = "Incorrect username.";
+			res.locals.errMsg = "Incorrect username.";
 			req.session.reset();
 			res.render('login');
 		});
@@ -18,6 +18,24 @@ function sessionCheck(req, res, next) {
 	} else {
 		res.locals.errMsg = "You are not logged in";
 		res.render('login');
+	}
+}
+
+function sessionCheckRest(req, res, next) {
+	if (req.session && req.session.name) {
+		User.getDisplayPortfolio(req.session.name).then(function(portfolioId) {
+			res.locals.errMsg = null;
+			res.locals.displayPortfolio = portfolioId;
+		}, function(msg) {
+			res.locals.errMsg = "Incorrect username.";
+			req.session.reset();
+			res.status(403).json({error: res.locals.errMsg});
+		});
+		next();
+	} else {
+		res.locals.errMsg = "You are not logged in.";
+		req.session.reset();
+		res.status(403).json({error: res.locals.errMsg});
 	}
 }
 
@@ -41,13 +59,28 @@ router.post('/save', sessionCheck, function(req, res, next) {
 });
 
 /* GET all json content from the mongo db */
-router.get('/content', function(req, res, next) {
-	Portfolio.getAll().then(function(data){
-		res.setHeader("Content-Type", "application/json");
-		res.json(data || {error: "Could not find any portfolios"});
+router.get('/content', sessionCheckRest, function(req, res, next) {
+	Portfolio.getAll().then(function(portfolios){
+		var response = {
+			displayPortfolio: res.locals.displayPortfolio,
+			portfolios: portfolios
+		};
+		if (!res.locals.displayPortfolio) {
+			User.getDisplayPortfolio(req.session.name).then(function(displayPortfolio){
+				response.displayPortfolio = displayPortfolio;
+				console.log(response);
+				res.setHeader("Content-Type", "application/json");
+				res.json(response);
+			},function(err){
+				res.status(500).json({error:"Could not find display Portfolio."});
+			});
+		} else {
+			res.setHeader("Content-Type", "application/json");
+			res.json(response);
+		}
 	}, function(err){
 		res.setHeader("Content-Type", "application/json");
-		res.status(500).json([]);
+		res.status(500).json({});
 	});
 });
 
@@ -74,9 +107,10 @@ router.post('/login', function(req, res, next) {
 	var body = req.body,
 		name = body.name || "",
 		password = body.password || "";
-	User.login({name:name, password:password}).then(function(responseText) {
+	User.login({name:name, password:password}).then(function(portfolio) {
 		//set the session
 		req.session.name = name;
+		res.locals.portfolio = portfolio;
 		res.render("dashboard");
 	}, function(responseText) {
 		req.session.reset();

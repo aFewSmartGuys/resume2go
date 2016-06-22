@@ -84,7 +84,7 @@ module.exports = {
 					} else {
 						user.comparePassword(args.password, function(err, success) {
 							if (success) {
-								resolve("success");
+								resolve(user.portfolio);
 							} else {
 								reject("incorrect Password");
 							}
@@ -97,7 +97,7 @@ module.exports = {
 		});
 	},
 
-	getPortfolio: function(name) {
+	getDisplayPortfolio: function(name) {
 		return new Promise(function(resolve, reject) {
 			User.findOne({name: name}, function(err, user) {
 				if (err) {
