@@ -19,14 +19,17 @@ function mainCtrl($scope, $http) {
 		$scope.meta = content.findById($scope.currId).meta;
 		$scope.content = content.findById($scope.currId).content;
 	}, function(err) {
-		console.log("Error getting content");
+		console.log(err);
 	});
 
 	$scope.save = function() {
 		content.update({meta:$scope.meta, content:$scope.content});
 		$scope.ids = content.getIds();
 		$scope.currId = $scope.meta.id;
-		console.log(content.toString($scope.currId));
+		var sendData = {
+			portfolio: content.toString($scope.currId),
+			displayPortfolio: $scope.displayPortfolio
+		};
 		//spinner
 		$http({
 			method: "POST",
@@ -34,11 +37,8 @@ function mainCtrl($scope, $http) {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			data: content.toString($scope.currId)
-		}).then(function(data) {
-			console.log(data);
-			console.log("saved");
-		}, function(err) {
+			data: sendData
+		}).then(function(data) {}, function(err) {
 			console.log(err.data);
 		});
 	};
@@ -58,7 +58,17 @@ function mainCtrl($scope, $http) {
 		$scope.content = portfolio.content;
 	};
 
-	$scope.updatePortfolio = function() {
-
+	$scope.updateDisplayPortfolio = function() {
+		//spinner
+		$http({
+			method: "POST",
+			url: "displayPortfolio/update",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: {pid:$scope.displayPortfolio}
+		}).then(function(data) {}, function(err) {
+			console.log(err.data);
+		});
 	};
 }

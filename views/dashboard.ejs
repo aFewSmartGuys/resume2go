@@ -54,7 +54,8 @@
 			</div>
 		</div>
 		<div>
-			<select ng-change="updatePortfolio()" ng-options="id for id in ids" ng-model="displayPortfolio"></select>
+			<select ng-options="id for id in ids" ng-model="displayPortfolio"></select>
+			<button ng-click="updateDisplayPortfolio()">Save</button>
 		</div>
 	</div>
 </div>

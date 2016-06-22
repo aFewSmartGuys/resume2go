@@ -48,12 +48,22 @@ router.get('/', sessionCheck, function(req, res, next) {
 	res.render('dashboard');
 });
 
-/* POST save updated content to the database */
+/* POST save updated portfolio to the database */
 router.post('/save', sessionCheck, function(req, res, next) {
 	Portfolio.write(req.body).then(function(data) {
 		res.status(200);
 	}, function(err) {
 		console.log("error saving updated content");
+		res.status(500);
+	});
+});
+
+/* POST update the portfolio to display in the database */
+router.post('/displayPortfolio/update', sessionCheck, function(req, res, next) {
+	User.updateDisplayPortfolio(req.body.pid, req.session.name).then(function(data) {
+		res.status(200);
+	}, function(err) {
+		res.locals.errMsg = "Could not update portfolio";
 		res.status(500);
 	});
 });
@@ -68,7 +78,6 @@ router.get('/content', sessionCheckRest, function(req, res, next) {
 		if (!res.locals.displayPortfolio) {
 			User.getDisplayPortfolio(req.session.name).then(function(displayPortfolio){
 				response.displayPortfolio = displayPortfolio;
-				console.log(response);
 				res.setHeader("Content-Type", "application/json");
 				res.json(response);
 			},function(err){

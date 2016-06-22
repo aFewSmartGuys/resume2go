@@ -111,5 +111,16 @@ module.exports = {
 				}
 			});
 		});
+	},
+
+	updateDisplayPortfolio: function(pid, name) {
+		return new Promise(function(resolve, reject) {
+			User.findOneAndUpdate({name: name}, {portfolio:pid},
+			{ upsert: false, returnNewDocument: true },
+			function(err, doc) {
+				if (err) reject(err);
+				else resolve(doc);
+			});
+		});
 	}
 };
