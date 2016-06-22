@@ -29,7 +29,7 @@ function mainCtrl($scope, $http) {
 	});
 	$scope.scrollToContent = function(name){
 	    $('html, body').animate({
-	        scrollTop: $("#"+stu(name)).offset().top
+	        scrollTop: $("#"+Rezoomae.utils.spacesToUnderscores(name)).offset().top
 		}, 500);
 	};
 }
