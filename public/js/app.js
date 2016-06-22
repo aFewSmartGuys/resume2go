@@ -5,7 +5,7 @@ app.controller("mainCtrl", ['$scope', '$http', mainCtrl]);
 app.directive("heading", headingDirective);
 app.directive("content", contentDirective);
 
-app.filter("spaceToUnderscore", spaceToUnderscore);
+app.filter("spacesToUnderscores", spacesToUnderscores);
 
 
 function mainCtrl($scope, $http) {
@@ -34,17 +34,8 @@ function mainCtrl($scope, $http) {
 	};
 }
 
-var stu = function(str) {
-	if (typeof str === "string") {
-		return str.split(" ").join("_");
-	} else {
-		console.log("weird object passed to filter");
-		return str;
-	}
-};
-
-function spaceToUnderscore() {
-	return stu;
+function spacesToUnderscores() {
+	return Rezoomae.utils.spacesToUnderscores;
 }
 
 function headingDirective() {
@@ -61,7 +52,7 @@ function headingDirective() {
 function contentDirective() {
 	return {
 		restrict: "E",
-		template: "<div id='{{content.title | spaceToUnderscore}}' class='textElements'>\
+		template: "<div id='{{content.title | spacesToUnderscores}}' class='textElements'>\
 			<h2 class='contentHeader'>{{content.title}}</h2>\
 			<div class='contentBox' ng-bind-html='content.content'></div>\
 		</div>"

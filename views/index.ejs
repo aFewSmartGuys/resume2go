@@ -3,9 +3,7 @@
 <head>
 	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<!--[if lt IE 9]>
-  	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body onload="normalize()" onresize="normalize()" onmousemove="normalize()" onscroll="normalize()" ng-cloak>
@@ -21,7 +19,7 @@
 
 		<!-- Photo -->
 		<div id="imgDiv">
-			<img ng-src="{{mainImagePath}}" alt="homePhoto" id="home1" ng-cloak>
+			<img class="pure-img" ng-src="{{mainImagePath}}" alt="homePhoto" id="home1" ng-cloak>
 		</div>
 
 		<div id="floatingButton">

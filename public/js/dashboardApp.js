@@ -8,7 +8,7 @@ function mainCtrl($scope, $http) {
 
 	$http({
 		method: "GET",
-		url: "content"
+		url: "/user/content"
 	}).then(function(data) {
 		var response = data.data;
 		content = new Rezoomae.classes.Content(response.portfolios);

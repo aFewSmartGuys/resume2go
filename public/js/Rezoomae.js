@@ -15,6 +15,14 @@ var Rezoomae = (function() {
 				}else{
 					return parseElement.firstChild;
 				}
+			},
+			spacesToUnderscores: function(str) {
+				if (typeof str === "string") {
+					return str.split(" ").join("_");
+				} else {
+					console.log("weird object passed to spacesToUnderscores");
+					return str;
+				}
 			}
 		},
 		classes: {
