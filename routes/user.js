@@ -49,22 +49,22 @@ router.get('/', sessionCheck, function(req, res, next) {
 });
 
 /* POST save updated portfolio to the database */
-router.post('/save', sessionCheck, function(req, res, next) {
+router.post('/save', sessionCheckRest, function(req, res, next) {
 	Portfolio.write(req.body).then(function(data) {
-		res.status(200);
+		res.status(200).json({success:"portfolio saved"});
 	}, function(err) {
-		console.log("error saving updated content");
-		res.status(500);
+		res.locals.errMsg = "Error saving portfolio";
+		res.status(500).json({error:res.locals.errMsg});
 	});
 });
 
 /* POST update the portfolio to display in the database */
-router.post('/displayPortfolio/update', sessionCheck, function(req, res, next) {
+router.post('/displayPortfolio/update', sessionCheckRest, function(req, res, next) {
 	User.updateDisplayPortfolio(req.body.pid, req.session.name).then(function(data) {
-		res.status(200);
+		res.status(200).json({success:"display portfolio updated"});
 	}, function(err) {
 		res.locals.errMsg = "Could not update portfolio";
-		res.status(500);
+		res.status(500).json({error:res.locals.errMsg});
 	});
 });
 

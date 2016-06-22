@@ -13,9 +13,9 @@ function mainCtrl($scope, $http) {
 		var response = data.data;
 		content = new Rezoomae.classes.Content(response.portfolios);
 		
-		$scope.ids = content.getIds();
-		$scope.currId = !!$scope.ids ? $scope.ids[0] : "";
 		$scope.displayPortfolio = response.displayPortfolio || "";
+		$scope.ids = content.getIds();
+		$scope.currId = $scope.displayPortfolio.length > 0 ? $scope.displayPortfolio : "";
 		$scope.meta = content.findById($scope.currId).meta;
 		$scope.content = content.findById($scope.currId).content;
 	}, function(err) {
@@ -26,19 +26,17 @@ function mainCtrl($scope, $http) {
 		content.update({meta:$scope.meta, content:$scope.content});
 		$scope.ids = content.getIds();
 		$scope.currId = $scope.meta.id;
-		var sendData = {
-			portfolio: content.toString($scope.currId),
-			displayPortfolio: $scope.displayPortfolio
-		};
 		//spinner
 		$http({
 			method: "POST",
-			url: "save",
+			url: "/user/save",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			data: sendData
-		}).then(function(data) {}, function(err) {
+			data: content.toString($scope.currId)
+		}).then(function(data) {
+			console.log(data);
+		}, function(err) {
 			console.log(err.data);
 		});
 	};
@@ -62,7 +60,7 @@ function mainCtrl($scope, $http) {
 		//spinner
 		$http({
 			method: "POST",
-			url: "displayPortfolio/update",
+			url: "/user/displayPortfolio/update",
 			headers: {
 				"Content-Type": "application/json"
 			},

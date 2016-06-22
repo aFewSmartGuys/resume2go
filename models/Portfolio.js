@@ -13,7 +13,7 @@ var portfolioSchema = mongoose.Schema({
     }]
   });
 
-var Rezoomae = mongoose.model('Portflio', portfolioSchema);
+var Rezoomae = mongoose.model('Portfolio', portfolioSchema);
 
 module.exports = {
 
@@ -22,7 +22,7 @@ module.exports = {
    */
   get: function(id) {
     return new Promise(function(resolve, reject) {
-      Rezoomae.findOne({"id": id}, function(err, content) {
+      Rezoomae.find({"id": id}, function(err, content) {
         if (err) {
           console.log(err);
           reject(err);
@@ -45,7 +45,6 @@ module.exports = {
   },
 
   write: function(updatedContent) {
-    console.log(updatedContent);
     return new Promise(function(resolve, reject) {
       Rezoomae.findOneAndUpdate({'id':updatedContent.meta.id},updatedContent,
       {

@@ -58,6 +58,18 @@
 		}) || emptyPortfolio();
 	};
 
+	// return only if there is only one portfolio
+	// there will only be one portfolio loaded on the display page
+	Content.prototype.getDisplayPortfolio = function() {
+		return this.portfolios.length===1?this.portfolios[0]:emptyPortfolio();
+	};
+
+	Content.prototype.getHeadings = function(pid) {
+		return this.findById(pid).content.map(function(cobj) {
+			return cobj.title;
+		});
+	};
+
 	Content.prototype.getIds = function() {
 		return this.portfolios.map(function(p){
 			return p.meta.id;

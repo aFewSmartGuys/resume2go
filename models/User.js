@@ -122,5 +122,21 @@ module.exports = {
 				else resolve(doc);
 			});
 		});
-	}
+	},
+
+	getDPId: function() {
+		return new Promise(function(resolve, reject) {
+			User.findOne({}, function(err, user) {
+				if (err) {
+					reject(err);
+					return;
+				}
+				if (user) {
+					resolve(user.portfolio);
+				} else {
+					reject("display portfolio not found");
+				}
+			});
+		});
+	},
 };
