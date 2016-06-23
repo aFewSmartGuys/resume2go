@@ -1,4 +1,4 @@
-var Rezoomae = (function() {
+var Resume = (function() {
 	"use strict";
 
 	var parseElement = document.createElement('div');

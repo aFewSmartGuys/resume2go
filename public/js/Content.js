@@ -1,8 +1,8 @@
-(function(Rezoomae){
+(function(Resume){
 	"use strict";
 
-	if (!Rezoomae) {
-		console.log("Rezoomae not initialized.", "Include Rezoomae.js first.");
+	if (!Resume) {
+		console.log("Resume not initialized.", "Include Resume.js first.");
 		return;
 	}
 
@@ -94,6 +94,6 @@
 		}
 	};
 
-	Rezoomae.classes.Content = Content;
+	Resume.classes.Content = Content;
 
-}(Rezoomae));
+}(Resume));
