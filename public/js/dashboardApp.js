@@ -11,7 +11,7 @@ function mainCtrl($scope, $http) {
 		url: "/user/content"
 	}).then(function(data) {
 		var response = data.data;
-		content = new Rezoomae.classes.Content(response.portfolios);
+		content = new Resume.classes.Content(response.portfolios);
 		
 		$scope.displayPortfolio = response.displayPortfolio || "";
 		$scope.ids = content.getIds();

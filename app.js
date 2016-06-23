@@ -10,7 +10,7 @@ var user = require('./routes/user');
 
 // create global connection to mongoDB
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/rezoomae');
+var db = mongoose.connect('mongodb://localhost/resume');
 db.connection.on('error', console.error.bind(console, 'connection error:'));
 db.connection.once('open', function() { console.log('Connected to database.'); });
 var User = require('./models/User');

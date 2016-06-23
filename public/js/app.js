@@ -16,7 +16,7 @@ function mainCtrl($scope, $http) {
 		method: "GET",
 		url: "/content"
 	}).then(function(data){
-		content = new Rezoomae.classes.Content(data.data);
+		content = new Resume.classes.Content(data.data);
 		var dp = content.getDisplayPortfolio();
 
 		$scope.title = dp.meta.title;
@@ -29,13 +29,13 @@ function mainCtrl($scope, $http) {
 	});
 	$scope.scrollToContent = function(name){
 	    $('html, body').animate({
-	        scrollTop: $("#"+Rezoomae.utils.spacesToUnderscores(name)).offset().top
+	        scrollTop: $("#"+Resume.utils.spacesToUnderscores(name)).offset().top
 		}, 500);
 	};
 }
 
 function spacesToUnderscores() {
-	return Rezoomae.utils.spacesToUnderscores;
+	return Resume.utils.spacesToUnderscores;
 }
 
 function headingDirective() {
