@@ -52,10 +52,37 @@
 		return JSON.stringify(obj);
 	};
 
+	/**
+	 * @return a portfolio { meta: ... , content: ... }
+	 */
 	Content.prototype.findById = function(id) {
 		return this.portfolios.find(function(p) {
 			return p.meta.id === id;
 		}) || emptyPortfolio();
+	};
+
+	/**
+	 * Copies the content so that the angular won't overwrite it when the user changes it in the dashboard
+	 */
+	Content.prototype.getContent = function(id) {
+		var copy = [];
+		var content = this.findById(id).content;
+		for (var i = 0; i < content.length; ++i) {
+			copy.push(content[i]);
+		}
+		return copy;
+	};
+
+	/**
+	 * Copies the meta obj's properties so that the angular won't overwrite it when the user changes it in the dashboard
+	 */
+	Content.prototype.getMeta = function(id) {
+		var copy = {};
+		var meta = this.findById(id).meta;
+		for (var key in meta) {
+			copy[key] = meta[key];
+		}
+		return copy;
 	};
 
 	// return only if there is only one portfolio

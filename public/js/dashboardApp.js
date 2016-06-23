@@ -11,13 +11,13 @@ function mainCtrl($scope, $http) {
 		url: "/user/content"
 	}).then(function(data) {
 		var response = data.data;
-		content = new Resume.classes.Content(response.portfolios);
+		window.content = content = new Resume.classes.Content(response.portfolios);
 		
 		$scope.displayPortfolio = response.displayPortfolio || "";
 		$scope.ids = content.getIds();
 		$scope.currId = $scope.displayPortfolio.length > 0 ? $scope.displayPortfolio : "";
-		$scope.meta = content.findById($scope.currId).meta;
-		$scope.content = content.findById($scope.currId).content;
+		$scope.meta = content.getMeta($scope.currId);
+		$scope.content = content.getContent($scope.currId);
 	}, function(err) {
 		console.log(err);
 	});
@@ -51,9 +51,8 @@ function mainCtrl($scope, $http) {
 
 	$scope.viewPortfolio = function() {
 		//save the current portfolio first???
-		var portfolio = content.findById($scope.currId);
-		$scope.meta = portfolio.meta;
-		$scope.content = portfolio.content;
+		$scope.meta = content.getMeta($scope.currId);
+		$scope.content = content.getContent($scope.currId);
 	};
 
 	$scope.updateDisplayPortfolio = function() {
