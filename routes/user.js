@@ -50,6 +50,10 @@ router.get('/', sessionCheck, function(req, res, next) {
 
 /* POST save updated portfolio to the database */
 router.post('/save', sessionCheckRest, function(req, res, next) {
+	if (typeof req.body.meta.id === "string" && req.body.meta.id === "") {
+		res.locals.errMsg = "You must specify an Id before saving a portfolio.";
+		res.status(400).json({error:res.locals.errMsg});
+	}
 	Portfolio.write(req.body).then(function(data) {
 		res.status(200).json({success:"portfolio saved"});
 	}, function(err) {
@@ -64,6 +68,16 @@ router.post('/displayPortfolio/update', sessionCheckRest, function(req, res, nex
 		res.status(200).json({success:"display portfolio updated"});
 	}, function(err) {
 		res.locals.errMsg = "Could not update portfolio";
+		res.status(500).json({error:res.locals.errMsg});
+	});
+});
+
+/* POST delete a portfolio */
+router.post('/portfolio/delete', sessionCheckRest, function(req, res, next) {
+	Portfolio.delete(req.body.id).then(function(data) {
+		res.status(200).json({success:"display portfolio deleted"});
+	}, function(err) {
+		res.locals.errMsg = "Could not delete portfolio";
 		res.status(500).json({error:res.locals.errMsg});
 	});
 });

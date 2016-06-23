@@ -1,10 +1,11 @@
 var app = angular.module("app", []);
 
-app.controller("mainCtrl", ['$scope', '$http', mainCtrl]);
+app.controller("mainCtrl", ["$scope", "$http", mainCtrl]);
 
 function mainCtrl($scope, $http) {
 	// Get the content from the backend
 	var content;
+	var spinner = '<i class="fa fa-spinner" aria-hidden="true"></i>';
 
 	$http({
 		method: "GET",
@@ -41,6 +42,22 @@ function mainCtrl($scope, $http) {
 		});
 	};
 
+	$scope.deletePortfolio = function(id) {
+		$http({
+			method: "POST",
+			url: "/user/portfolio/delete",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: {id:id}
+		}).then(function(data) {
+			console.log(data);
+			$scope.ids.splice($scope.ids.indexOf(id), 1);
+		}, function(err) {
+			console.log(err.data);
+		});
+	};
+
 	$scope.newSection = function() {
 		$scope.content.push({title:"", content: ""})
 	};
@@ -55,7 +72,8 @@ function mainCtrl($scope, $http) {
 		$scope.content = content.getContent($scope.currId);
 	};
 
-	$scope.updateDisplayPortfolio = function() {
+	$scope.updateDisplayPortfolio = function(id) {
+		$scope.displayPortfolio = id;
 		//spinner
 		$http({
 			method: "POST",
