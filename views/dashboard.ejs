@@ -18,12 +18,13 @@
 
 <div class="banner">
 	<h1 class="banner-head">
-		Portfolios
+		Create Your Resume
 	</h1>
 </div>
 
 <div class="wrapper" ng-controller="mainCtrl">
 	<div>
+		Edit portfolio:
 		<select ng-change="viewPortfolio()" ng-options="id for id in ids" ng-model="currId"></select>
 	</div>
 	<div>
@@ -46,17 +47,27 @@
 			<button class="pure-button pure-u" ng-click="newSection()"><i class="fa fa-plus"></i></button>
 		</form>
 	</div>
-	<div>
-		Portfolio that will be displayed:
-		<select class="" ng-options="id for id in ids" ng-model="displayPortfolio"></select>
-		<button class="pure-button pure-input-1-2 pure-button-primary" ng-click="updateDisplayPortfolio()">Save</button>
-	</div>
+	<table class="pure-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Set to Display</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="id in ids" ng-if="id.length>0">
+				<td>{{id}}</td>
+				<td><button class="pure-button pure-input-1-2 button-secondary" ng-click="updateDisplayPortfolio(id)"><i class="fa fa-check"></i></button></td>
+				<td><button class="pure-button pure-input-1-2 button-error" ng-click="deletePortfolio(id)"><i class="fa fa-trash"></i></button></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <footer>
 		<p></p>
 </footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="/js/Resume.js"></script>
 	<script src="/js/Content.js"></script>
