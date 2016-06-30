@@ -1,10 +1,12 @@
 # Resume 2 Go
 ### A portfolio site template.
 
-###Summary
+### Summary
 resume2go is a resume template site that will allow the owner to customize their own resume and make changes using an interactive content dashboard.
 
 Only one user can be registered at a time. The user may have multiple portfolios saved and can select one for display at a time.
+
+resume2go runs on the MEAN stack.
 
 ## Install on debian based distro
 
@@ -22,6 +24,11 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
+### Get g++
+```bash
+sudo apt-get install g++
+```
+
 ## Install on redhat
 
 ### Get git
@@ -29,7 +36,7 @@ sudo apt-get install -y mongodb-org
 sudo yum install git
 ```
 
-### Install mongodb
+### Get mongodb
 
 Create a repo file for yum
 ```bash
@@ -51,12 +58,13 @@ Then install directly through yum
 sudo yum install -y mongodb-org
 ```
 
-### Install nodejs and some dependencies
+### Get nodejs, g++ and forever
 ```bash
 sudo su
 curl --silent --location https://rpm.nodesource.com/setup | bash -
 yum install -y nodejs
 yum install gcc-c++
+npm install -g forever
 exit # exit su mode
 ```
 
@@ -65,6 +73,5 @@ exit # exit su mode
 git clone https://github.com/verdude/resume2go
 cd resume2go
 npm install
-sudo npm install -g forever
 forever start bin/www
 ```
