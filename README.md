@@ -29,6 +29,11 @@ sudo apt-get install -y mongodb-org
 sudo apt-get install g++
 ```
 
+### Get forever
+```bash
+sudo npm install -g forever
+```
+
 ## Install on redhat
 
 ### Get git
