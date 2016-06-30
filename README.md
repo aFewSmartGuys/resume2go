@@ -1,13 +1,17 @@
 # Resume 2 Go
 ### A portfolio site template.
 
+###Summary
+resume2go is a resume template site that will allow the owner to customize their own resume and make changes using an interactive content dashboard.
+
+Only one user can be registered at a time. The user may have multiple portfolios saved and can select one for display at a time.
+
 ## Install on debian based distro
 
 ### Get Node.js
 ```bash
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install nodejs
-sudo apt-get install npm #if it has not already been installed
 ```
 
 ### Get mongoDB
@@ -18,6 +22,7 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
+<<<<<<< HEAD
 ## Install on redhat
 
 ### Get git
@@ -59,9 +64,29 @@ exit # exit su mode
 ```
 
 ### Set up the app
+=======
+### Get g++
+```bash
+# g++ is a dependency for bcrypt (password encryption library)
+sudo apt-get install g++
+```
+
+### Get forever (Optional)
+```bash
+# forever is a tool to keep scripts up forever. it will restart scripts if they go down.
+# https://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/
+sudo npm install -g forever
+```
+
+## Setup
+>>>>>>> 7c2ddd75ded32ea7484bf3856faf721a7cd02ec4
 ```bash
 git clone https://github.com/verdude/resume2go
 cd resume2go
 npm install
+<<<<<<< HEAD
 forever start bin/www
+=======
+forever bin/www
+>>>>>>> 7c2ddd75ded32ea7484bf3856faf721a7cd02ec4
 ```
