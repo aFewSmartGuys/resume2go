@@ -22,7 +22,6 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
-<<<<<<< HEAD
 ## Install on redhat
 
 ### Get git
@@ -52,41 +51,20 @@ Then install directly through yum
 sudo yum install -y mongodb-org
 ```
 
-
 ### Install nodejs and some dependencies
 ```bash
 sudo su
 curl --silent --location https://rpm.nodesource.com/setup | bash -
 yum install -y nodejs
 yum install gcc-c++
-npm install -g forever
 exit # exit su mode
 ```
 
-### Set up the app
-=======
-### Get g++
-```bash
-# g++ is a dependency for bcrypt (password encryption library)
-sudo apt-get install g++
-```
-
-### Get forever (Optional)
-```bash
-# forever is a tool to keep scripts up forever. it will restart scripts if they go down.
-# https://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/
-sudo npm install -g forever
-```
-
-## Setup
->>>>>>> 7c2ddd75ded32ea7484bf3856faf721a7cd02ec4
+## Setup for all distros
 ```bash
 git clone https://github.com/verdude/resume2go
 cd resume2go
 npm install
-<<<<<<< HEAD
+sudo npm install -g forever
 forever start bin/www
-=======
-forever bin/www
->>>>>>> 7c2ddd75ded32ea7484bf3856faf721a7cd02ec4
 ```
