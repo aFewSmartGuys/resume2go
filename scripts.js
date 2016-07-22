@@ -1,7 +1,6 @@
 function normalize() {
 	makeImageFullScreen();
 	fixTopMargin();
-	resumeButton();
 }
 
 function makeImageFullScreen() {
@@ -30,46 +29,54 @@ function makeImageFullScreen() {
 
 function fixTopMargin() {
 	var imgHeight = document.getElementById("home1").height;
-	document.getElementById("Education").style.marginTop = imgHeight + "px";
-}
-
-function resumeButton() {
-	var resumeButton = document.getElementById("floatingLink");
-	var myImg = document.getElementById("home1");
-
-	resumeButton.top = (myImg.height - 20) + "px";
+	document.getElementById("Skills").style.marginTop = imgHeight + "px";
 }
 
 $(document).ready(function() {
-	
-	// resume button scroll functionality
-	$("#floatingButton").click(function() {
-		$('html, body').animate({
-			scrollTop: $("#Education").offset().top
-		}, 500);
-	});
+	setupScrolling();
+});
+
+function setupScrolling() {
 
 	$("#educationButton").click(function() {
-		$('html, body').animate({
+		$("html, body").animate({
 			scrollTop: $("#Education").offset().top
 		}, 500);
 	});
 
 	$("#experienceButton").click(function() {
-		$('html, body').animate({
+		$("html, body").animate({
 			scrollTop: $("#Experience").offset().top
 		}, 500);
 	});
 
 	$("#skillsButton").click(function() {
-		$('html, body').animate({
+		$("html, body").animate({
 			scrollTop: $("#Skills").offset().top
 		}, 500);
 	});
 
 	$("#contactButton").click(function() {
-		$('html, body').animate({
+		$("html, body").animate({
 			scrollTop: $("#Contact").offset().top
 		}, 500);
 	});
-});
+
+	$("#certificationButton").click(function() {
+		$("html, body").animate({
+			scrollTop: $("#Certification").offset().top
+		}, 500);
+	});
+
+	$("#accomplishmentsButton").click(function() {
+		$("html, body").animate({
+			scrollTop: $("#Accomplishments").offset().top
+		}, 500);
+	});
+
+	$("#samplesButton").click(function() {
+		$("html, body").animate({
+			scrollTop: $("#Samples").offset().top
+		}, 500);
+	});
+}

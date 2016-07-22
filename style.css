@@ -33,7 +33,6 @@ nav ul li a {
 nav ul li a:hover {
 	font-size: 35px;
 	margin-right: 10px;
-	//border-bottom: 2px solid;
 }
 
 h2 {
@@ -85,12 +84,12 @@ p {
 a {
 	color: #bf1f2e;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:hover {
 	text-decoration: underline;
 }
-
 
 #imgDiv {
 	position: absolute;
@@ -106,26 +105,6 @@ a:hover {
 	background: url("img/background2.jpg") no-repeat;
 	background-size: cover;
 
-}
-
-#floatingButton a {
-	display: inline-block;
-	position: absolute;
-	top: 85%;
-	left: 42%;
-	background: yellow;
-	padding: 20px 50px;
-	border-radius: 3px;
-	color: black;
-	text-decoration: none;
-	font-size: 25px;
-	transition: top .25s;
-}
-
-#floatingButton a:hover {
-	text-decoration: none;
-	text-shadow: 2px 4px 3px rgba(0,0,0,.6);
-	top: 84%;
 }
 
 #spacer {
@@ -148,7 +127,7 @@ footer p {
 	padding-left: 10%;
 }
 
-.innerText, #Skills ul, #Contact ul {
+.innerText {
 	margin-left: 3%;
 	background: white;
 	max-width: 75%;
@@ -178,4 +157,8 @@ footer p {
 
 .icons img:hover {
 	margin-top: -10px;
+}
+
+.video {
+	text-align:center;
 }
