@@ -100,11 +100,15 @@ a:hover {
 	overflow: hidden;
 }
 
+#imgDiv img {
+	-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+}
+
 #content {
 	width: 100%;
 	background: url("img/background2.jpg") no-repeat;
 	background-size: cover;
-
 }
 
 #spacer {
@@ -120,6 +124,10 @@ footer {
 
 footer p {
 	color: white;
+}
+
+.padleft {
+	padding-left: 1em;
 }
 
 .textElements {

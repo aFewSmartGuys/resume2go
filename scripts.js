@@ -29,7 +29,7 @@ function makeImageFullScreen() {
 
 function fixTopMargin() {
 	var imgHeight = document.getElementById("home1").height;
-	document.getElementById("Skills").style.marginTop = imgHeight + "px";
+	document.getElementById("Experience").style.marginTop = imgHeight + "px";
 }
 
 $(document).ready(function() {
@@ -62,9 +62,9 @@ function setupScrolling() {
 		}, 500);
 	});
 
-	$("#certificationButton").click(function() {
+	$("#certificationsButton").click(function() {
 		$("html, body").animate({
-			scrollTop: $("#Certification").offset().top
+			scrollTop: $("#Certifications").offset().top
 		}, 500);
 	});
 
