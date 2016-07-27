@@ -1,7 +1,37 @@
 
 body {
-	font-family: "Courier New";
+	font-family: "Helvetica";
 	margin: 0 !important;
+}
+
+@media only screen and (max-device-width: 768px) {
+	#imgDiv {
+		background:url(img/cody.png) center top;
+		width:100%;
+		overflow:hidden;
+	-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+	    filter: grayscale(100%);
+	}
+	#imgDiv img {
+		visibility: hidden;
+	}
+	* {
+		padding: green;
+	}
+}
+
+#imgDiv {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	overflow: hidden;
+}
+
+#imgDiv img {
+	-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
 }
 
 nav {
@@ -22,9 +52,9 @@ nav ul li {
 nav ul li a {
 	color: #fff;
 	background: black;
-	padding: 2px 5px 0px 5px;
+	padding: 2px 5px 5px 5px;
 	font-size: 30px;
-	font-family: "Courier New";
+	font-family: "Helvetica";
 	line-height: 45px;
 	transition: font-size .1s;
 	-webkit-transition: font-size .1s; /* Safari */
@@ -72,9 +102,9 @@ p {
 	top: 0;
 	color: white;
 	background: black;
-	padding: 2px 5px 0px 5px;
+	padding: 2px 5px 5px 5px;
 	font-size: 3em;
-	font-family: "Courier New";
+	font-family: "Helvetica";
 }
 
 #logo:hover {
@@ -89,20 +119,6 @@ a {
 
 a:hover {
 	text-decoration: underline;
-}
-
-#imgDiv {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: -1;
-	overflow: hidden;
-}
-
-#imgDiv img {
-	-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
-    filter: grayscale(100%);
 }
 
 #content {
