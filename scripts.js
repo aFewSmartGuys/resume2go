@@ -34,6 +34,9 @@ function makeImageFullScreen() {
 }
 
 function fixTopMargin() {
+	// $(".expand1").toggle("height");
+	// $(".expand2")
+	// $(".expand3")
 	var imgHeight = document.getElementById("home1").height;
 	document.getElementById("Experience").style.marginTop = imgHeight + "px";
 	document.querySelector(".spinner").style.display="none";
@@ -42,6 +45,7 @@ function fixTopMargin() {
 
 $(document).ready(function() {
 	setupScrolling();
+	setupExpandableSections();
 });
 
 function setupScrolling() {
@@ -92,5 +96,23 @@ function setupScrolling() {
 		$("html, body").animate({
 			scrollTop: $("#ProfessionalGoals").offset().top
 		}, 500);
+	});
+}
+
+function setupExpandableSections() {
+	$("div#expand1").click(function(){
+		$("div.expand1").animate({
+			height: 'toggle'
+		});
+	});
+	$("div#expand2").click(function(){
+		$("div.expand2").animate({
+			height: 'toggle'
+		});
+	});
+	$("div#expand3").click(function(){
+		$("div.expand3").animate({
+			height: 'toggle'
+		});
 	});
 }

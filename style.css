@@ -6,8 +6,32 @@
 	transform: translate(-50%, -50%)
 }
 
+[id*="expand"] {
+	color:#bf1f2e;
+	cursor:pointer;
+	text-align:right;
+}
+
+[id*="expand"]:hover {
+	text-decoration:underline;
+}
+
+[class*="expand"] {
+	display:none;
+}
+
 .container {
 	display:none;
+}
+
+a {
+	color: #bf1f2e;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 body {
@@ -120,16 +144,6 @@ p {
 
 #logo:hover {
 	font-size: 3.1em;
-}
-
-a {
-	color: #bf1f2e;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-a:hover {
-	text-decoration: underline;
 }
 
 #content {

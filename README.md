@@ -1,1 +1,1 @@
-# 201html
+This is a static site customized for cody simonsen.
