@@ -97,6 +97,12 @@ function setupScrolling() {
 			scrollTop: $("#ProfessionalGoals").offset().top
 		}, 500);
 	});
+
+	$(".top").click(function() {
+		$("html, body").animate({
+			scrollTop: 0
+		}, 500);
+	});
 }
 
 function setupExpandableSections() {

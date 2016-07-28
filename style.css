@@ -20,6 +20,18 @@
 	display:none;
 }
 
+.btns .top {
+	bottom:170px;
+}
+
+.btns .mid {
+	bottom:110px;
+}
+
+.btns .bot {
+	bottom:50px;
+}
+
 .container {
 	display:none;
 }
@@ -44,15 +56,27 @@ body {
 		background:url(img/cody.png) center top;
 		width:100%;
 		overflow:hidden;
-	-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+		-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
 	    filter: grayscale(100%);
 	}
 	#imgDiv img {
 		visibility: hidden;
 	}
-	* {
-		padding: green;
+	.btns {
+		height:100px;
+		width:100px;
+		position:fixed;
+		right:10px;
+		cursor:pointer;
 	}
+}
+
+.btns img {
+	height:50px;
+	width:50px;
+	position:fixed;
+	right:10px;
+	cursor:pointer;
 }
 
 #imgDiv {
