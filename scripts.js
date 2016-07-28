@@ -36,6 +36,8 @@ function makeImageFullScreen() {
 function fixTopMargin() {
 	var imgHeight = document.getElementById("home1").height;
 	document.getElementById("Experience").style.marginTop = imgHeight + "px";
+	document.querySelector(".spinner").style.display="none";
+	document.querySelector(".container").style.display="block";
 }
 
 $(document).ready(function() {
